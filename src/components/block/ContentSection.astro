@@ -14,10 +14,9 @@ const {
 
 
 const sectionClasses = [
-  "border shadow-lg rounded-lg",
-  hasDefaultInnerStyles && "pt-0 p-8", 
+  hasDefaultInnerStyles && "pt-0", 
   className,
-  hasDefaultInnerStyles && (isDark ? "bg-foreground text-background" : "bg-background text-foreground"),
+  hasDefaultInnerStyles && (isDark ? "text-background" : "text-foreground"),
 ].filter(Boolean).join(' ');
 ---
 

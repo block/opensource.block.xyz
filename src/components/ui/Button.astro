@@ -1,0 +1,55 @@
+---
+export interface Props {
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
+  class?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
+}
+
+const { 
+  variant = 'default', 
+  size = 'default', 
+  class: className = '',
+  href,
+  target,
+  rel,
+  ...props 
+} = Astro.props;
+
+// Base classes
+const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-full text-default font-medium uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+
+// Variant classes
+const variantClasses = {
+  default: "text-primary-foreground hover:bg-primary/90",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  outline: "border border-black bg-background hover:border-gray-500",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  ghost: "hover:bg-accent hover:text-accent-foreground",
+  link: "text-primary underline-offset-4 hover:underline",
+};
+
+// Size classes
+const sizeClasses = {
+  default: "h-10 px-5 py-3",
+  sm: "h-8 rounded-md px-3 text-xs",
+  lg: "h-10 rounded-md px-8",
+  icon: "h-9 w-9",
+};
+
+const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element 
+  class={buttonClasses}
+  href={href}
+  target={target}
+  rel={rel}
+  {...props}
+>
+  <slot />
+</Element>

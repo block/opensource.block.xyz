@@ -2,15 +2,18 @@
 import { keyContributions} from './key-contributions';
 import ExternalLinksSection from '@/components/block/ExternalLinksSection.astro';
 
-interface Props {}
+interface Props {
+  className?: string;
+}
 
-const { } = Astro.props;
+const { className = '' } = Astro.props;
 ---
 
 <ExternalLinksSection
   title="Block's Significant Open Source Contributions"
   subtitle="Key Contributions"
-  externalLinks={keyContributions}>
+  externalLinks={keyContributions}
+  className={className}>
     Block has a deep and sustained commitment to open source, contributing to 
     foundational technologies that power our products and the broader developer ecosystem. 
     Our involvement spans across infrastructure, developer tooling, security, and financial 

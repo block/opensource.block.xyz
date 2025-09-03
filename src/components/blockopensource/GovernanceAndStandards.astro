@@ -1,17 +1,20 @@
 ---
 import { governanceLinks } from './governance-links';
-import ExternalLinksSection from '@/components/block/ExternalLinksSection.astro';
+import GovernanceLinkSection from '@/components/block/GovernanceLinkSection.astro';
 
-interface Props {}
+interface Props {
+  className?: string;
+}
 
-const { } = Astro.props;
+const { className = '' } = Astro.props;
 ---
 
-<ExternalLinksSection
+<GovernanceLinkSection
   title="Governance and Community Standards"
-  externalLinks={governanceLinks}>
+  governanceLinks={governanceLinks}
+  className={className}>
     We care deeply about fostering a safe, inclusive, and productive open source 
     community. We want every contributor to feel welcome and confident in 
     collaborating with us, whether you're fixing a typo or proposing a new 
     feature. Here are the principles and policies that guide our work:
-</ExternalLinksSection>
+</GovernanceLinkSection>

@@ -11,22 +11,24 @@ interface Props {
   title: string;
   subtitle?: string;
   externalLinks: ExternalLink[];
+  className?: string;
 }
 
 const { 
   title,
   subtitle,
   externalLinks,
+  className = '',
 } = Astro.props;
 ---
 
-<section>
+<section class={className}>
     <h2 class="mt-0">{title}</h2>
     <p>
       <slot />
     </p>
-    {subtitle && <h3 class="mb-0">{subtitle}</h3>}
-    <div id="contributions" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 py-6 md:py-8">
+    {subtitle && <h3 class="mt-15 mb-0">{subtitle}</h3>}
+    <div id="contributions" class="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-8 md:gap-x-50 py-6 md:py-8">
         {externalLinks.map((externalLink) => (
             <ExternalLinkCard 
               title={externalLink.name}

@@ -37,25 +37,25 @@ const githubUrl = identifier ? getGitHubUrl(type, identifier) : "#";
 // Size-based classes
 const sizeClasses = {
   sm: {
-    container: "text-xs",
+    container: "text-sm",
     padding: "px-2 py-1",
-    gap: "gap-1",
+    gap: "gap-2",
     icon: "w-3 h-3",
-    text: "text-xs font-medium"
+    text: "text-sm font-medium"
   },
   default: {
-    container: "text-sm",
+    container: "text-base",
     padding: "px-3 py-2",
     gap: "gap-2",
     icon: "w-4 h-4",
-    text: "text-sm font-medium"
+    text: "text-base font-medium"
   },
   lg: {
-    container: "text-base",
+    container: "text-lg",
     padding: "px-4 py-3",
     gap: "gap-3",
     icon: "w-5 h-5",
-    text: "text-base font-semibold"
+    text: "text-lg font-semibold"
   }
 };
 
@@ -84,19 +84,18 @@ const iconName = getIconName(type);
 const buttonText = getButtonText(type);
 
 ---
-<div class={`inline-flex rounded-md overflow-hidden border border-gray-700 ${currentSize.container}`} data-github-stats data-identifier={identifier} data-type={type}>
-  <!-- Left section: Action button -->
-  <div class={`flex items-center ${currentSize.gap} ${currentSize.padding} bg-gray-700 text-white`}>
-    <Icon name={iconName} class={`text-white ${currentSize.icon}`}/>
-    <span class={currentSize.text}>{buttonText}</span>
+<div class={`inline-flex ${currentSize.container}`} data-github-stats data-identifier={identifier} data-type={type}>
+  <!-- Icon section -->
+  <div class={`flex items-center ${currentSize.gap} text-foreground`}>
+    <Icon name={iconName} class={`text-foreground ${currentSize.icon}`}/>
   </div>
   
-  <!-- Right section: Count -->
+  <!-- Count section -->
   <a 
     href={githubUrl} 
     target="_blank" 
     rel="noopener noreferrer"
-    class={`flex items-center ${currentSize.padding} bg-black text-white hover:bg-gray-800 transition-colors no-underline`}
+    class={`flex items-center ${currentSize.padding} text-foreground hover:text-foreground/80 transition-colors no-underline`}
   >
     <span class={`${currentSize.text} stat-count`}>
       ...

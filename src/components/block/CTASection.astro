@@ -3,18 +3,19 @@ import { getUrlRelativeToBase } from '@/lib/utils';
 import Icon from '@/components/block/Icon.astro';
 import '@/styles/global.css';
 
+
 interface Props {
   title?: string;
   tagline?: string;
-  taglineIconName?: any;
+  taglineIconName?: string;
   description?: string;
   primaryButtonText?: string;
   primaryButtonHref?: string;
-  primaryButtonIconName?: any;
+  primaryButtonIconName?: string;
   secondaryButtonText?: string;
   secondaryButtonHref?: string;
-  secondaryButtonIconName?: any;
-  layout?: 'centered' | 'split';
+  secondaryButtonIconName?: string;
+  layout?: 'centered' | 'split' | 'minimal';
   isDark?: boolean;
   titleClasses? : string;
   descriptionClasses? : string;
@@ -34,8 +35,7 @@ const {
   secondaryButtonIconName,
   layout = 'centered',
   isDark = false,
-  titleClasses = "text-4xl md:text-6xl pb-1 m-0 font-white bg-clip-text text-transparent bg-gradient-to-r " + (isDark ? "from-background to-background/70" : "from-foreground to-foreground/70"),
-  descriptionClasses = "text-xl leading-relaxed m-0 " + (isDark ? "text-muted-background" : "text-muted-foreground"),
+  descriptionClasses = `text-xl leading-relaxed m-0 ${isDark ? "text-muted-background" : "text-muted-foreground"}`,
   className = '',
 } = Astro.props;
 
@@ -48,7 +48,7 @@ const sectionClasses = [
 ---
 
 <section class={`relative overflow-hidden ${sectionClasses}`}>
-  <div class="container mx-auto px-6 py-8">
+  <div class={layout === 'minimal' ? 'py-8' : 'container mx-auto px-6 py-8'}>
     {layout === 'centered' && (
       <div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-8">
         {tagline && (
@@ -63,15 +63,15 @@ const sectionClasses = [
         )}
         
         {title && (
-          <h1 class={titleClasses}>
+          <h1>
             {title}
           </h1>
         )}
         
         {description && (
-          <p class={descriptionClasses}>
+          <h4>
             {description}
-          </p>
+          </h4>
         )}
         
         <div class="flex gap-4 items-center flex-wrap justify-center">
@@ -117,15 +117,15 @@ const sectionClasses = [
         <div class="flex justify-between items-center gap-16 max-w-7xl mx-auto pt-4 lg:flex-row flex-col lg:text-left text-center lg:gap-16 gap-8">
           <div class="lg:flex-[3] flex flex-col gap-6">
             {title && (
-              <h1 class={titleClasses}>
+              <h1>
                 {title}
               </h1>
             )}
             
             {description && (
-              <p class={descriptionClasses}>
+              <h3>
                 {description}
-              </p>
+              </h3>
             )}
           </div>
           
@@ -157,6 +157,55 @@ const sectionClasses = [
           </div>
         </div>
       </>
+    )}
+    
+    {layout === 'minimal' && (
+      <div class="flex flex-col content-width-responsive">
+        <div class="text-content mb-8">
+          {tagline && (
+            <h5 class="uppercase text-left mb-0">
+              {tagline}
+            </h5>
+          )}
+          
+          {title && (
+            <h1 class="text-left mb-0 mt-0">
+              {title}
+            </h1>
+          )}
+          
+          {description && (
+            <h3 class="text-left mb-0 mt-3">
+              {description}
+            </h3>
+          )}
+        </div>
+        
+        <div class="flex gap-4 items-center flex-wrap">
+          {primaryButtonText && (
+            <a href={getUrlRelativeToBase(primaryButtonHref)} class="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold no-underline transition-all duration-200 whitespace-nowrap bg-primary text-primary-foreground border border-primary shadow-sm hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-md">
+              {primaryButtonIconName && (
+                <Icon name={primaryButtonIconName} class="w-4 h-4" />
+              )}
+              {primaryButtonText}
+            </a>
+          )}
+          
+          {secondaryButtonText && (
+            <a href={getUrlRelativeToBase(secondaryButtonHref)} class="inline-flex items-center gap-2 px-8 py-3 rounded-lg font-semibold no-underline transition-all duration-200 whitespace-nowrap bg-transparent text-foreground border border-border hover:bg-muted hover:-translate-y-0.5">
+              {secondaryButtonIconName && (
+                <Icon name={secondaryButtonIconName} class="w-4 h-4" />
+              )}
+              {secondaryButtonText}
+            </a>
+          )}
+          
+          <!-- Custom slot for additional actions -->
+          <div class="flex flex-col gap-4 items-center">
+            <slot />
+          </div>
+        </div>
+      </div>
     )}
   </div>
 </section>
@@ -205,3 +254,4 @@ const sectionClasses = [
     opacity: 0.7;
   }
 </style>
+

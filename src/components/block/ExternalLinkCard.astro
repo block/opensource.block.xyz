@@ -18,26 +18,21 @@ const {
 
 <ContentSection
     hasDefaultInnerStyles={false}>
-    <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group h-full p-6 md:p-8 bg-white flex flex-col text-left rounded-lg no-underline transition-colors duration-200 hover:bg-accent cursor-pointer"
-    >
-        <div class="flex items-start justify-between mb-3">
-            <div class="flex-1">
-                <h3 class="text-base md:text-lg lg:text-xl font-semibold mt-0 pt-0">
+    <div class="h-full pb-8 flex items-start justify-between">
+        <div class="flex-1 py-8 -my-8">
+            <h4 class="text-left mt-0 mb-0">
+                <a 
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="external-link-title"
+                >
                     {title}
-                </h3>
-            </div>
-            <div class="flex-shrink-0 ml-2 transition-transform duration-200 group-hover:scale-120">
-                <Icon name="external-link" />
-            </div>
-        </div>
-        <div class="flex-1">
-            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed mt-0">
+                </a>
+            </h4>
+            <p class="text-leftmb-0 space-y-4 text-foreground leading-relaxed">
                 {description}
             </p>
         </div>
-    </a>
+    </div>
 </ContentSection>

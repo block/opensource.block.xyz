@@ -3,13 +3,9 @@
 import Icon from '@/components/block/Icon.astro';
 import ContentSection from '@/components/block/ContentSection.astro';
 import GitHubStats from '@/components/block/GitHubStats.astro';
-import { Button } from '@/components/ui/button';
+import Button from '@/components/ui/Button.astro';
 import { featuredProjects } from './featured-projects';
 import "@/styles/global.css";
-
-interface Props {}
-
-const { } = Astro.props;
 
 export interface Project {
   name: string;
@@ -22,47 +18,54 @@ export interface Project {
 
 ---
 
-<h2 class="pb-4">Featured Projects</h2>
+<h2>Featured Projects</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 md:gap-y-16 md:gap-x-50 py-6 md:py-8">
 
 {featuredProjects.map((project) => (
-<ContentSection className='mb-8'>
-
-  <div class="flex items-center pt-0">
-    <div class="flex-shrink-0 w-24 h-24 relative -top-8 -left-4">
+  <div class="space-y-6">
+    
+    <div class="w-[90px] h-[90px]">
       <Icon name={project.iconName} class="w-full h-full" />
     </div>
-    <div class="flex-1">
-      <h3 class="p-0 m-0 mb-2">{project.name}</h3>
-      <div>
+    
+    <div class="space-y-4">
+      <h3 class="text-2xl font-semibold mx-0 mt-2 mb-0">{project.name}</h3>
+      
+      <div class="flex items-center gap-4">
         {project.starsAndForks && (
-          <GitHubStats type="stars" size="sm" repo={project.starsAndForks}/>
-          <GitHubStats type="forks" size="sm" repo={project.starsAndForks}/>
+          <GitHubStats type="stars" size="default" repo={project.starsAndForks}/>
+        )}
+        {project.starsAndForks && (
+          <GitHubStats type="forks" size="default" repo={project.starsAndForks}/>
         )}
         {project.followers && (
-          <GitHubStats type="followers" size="sm" account={project.followers}/>
+          <GitHubStats type="followers" size="default" account={project.followers}/>
         )}
       </div>
+      
+      <div class="space-y-4">
+        {project.paragraphs.map((paragraph) => (
+          <p class="text-foreground text-normal">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      
+      <Button 
+        variant="outline" 
+        size="default" 
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="gap-2 w-fit no-underline"
+      >
+        Learn more
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </Button>
     </div>
-  </div>
-  <div>
-    {project.paragraphs.map((paragraph) => (
-      <p class="text-sm text-foreground">
-        {paragraph}
-      </p>
-      )
-    )}
-    <a href={project.href} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="mt-2 inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm rounded-lg font-semibold no-underline transition-all duration-200 whitespace-nowrap bg-primary text-primary-foreground border border-primary shadow-sm hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-md">
-      <Icon name="external-link" class="w-4 h-4" />Learn more
-    </a>
     
   </div>
-
-</ContentSection>
 ))}
 
 </div>

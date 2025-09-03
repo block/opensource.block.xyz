@@ -76,22 +76,26 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: clamp(1rem, 4vw, 3rem);
 
   @media (width >= --theme(--breakpoint-sm)) {
     max-width: none;
+    padding-inline: clamp(1.5rem, 6vw, 4rem);
   }
 
   @media (width >= 1600px) {
     max-width: 1600px;
+    padding-inline: clamp(2rem, 8vw, 6rem);
   }
 
   @media (width >= 1800px) {
     max-width: 1800px;
+    padding-inline: clamp(2.5rem, 10vw, 8rem);
   }
 
   @media (width >= 2000px) {
     max-width: 1920px;
+    padding-inline: clamp(3rem, 12vw, 10rem);
   }
 }
 
@@ -140,6 +144,14 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    
+    /* Global hover colors */
+    --hover-border-color: oklch(0.8047 0 0);
+    --hover-text-color: oklch(0.5103 0 0);
+    --default-color: black;
+
+    /* Content width variables */
+    --content-width-responsive: 80%; /* 4/5 */
   }
 
   .dark {
@@ -188,23 +200,23 @@
 
   /* Typography - Block Content Styles */
   h1 {
-    @apply font-sans text-5xl font-black leading-none;
+    @apply font-sans text-4xl font-medium leading-18;
     @apply mt-8 mb-6 scroll-m-20 tracking-tight;
   }
 
   h2 {
-    @apply font-sans text-3xl font-semibold leading-relaxed;
+    @apply font-sans text-3xl font-medium leading-8;
     @apply mt-8 mb-6 scroll-m-20 tracking-tight;
   }
 
   h3 {
-    @apply font-sans text-2xl font-semibold leading-8;
+    @apply font-sans text-2xl font-medium leading-8;
     @apply mt-8 mb-4 scroll-m-20 tracking-tight;
   }
 
   h4 {
-    @apply font-sans text-xl font-semibold leading-7;
-    @apply mt-6 mb-4 scroll-m-20 tracking-tight;
+    @apply font-sans text-xl font-medium leading-8;
+    @apply mt-8 mb-4 scroll-m-20 tracking-tight;
   }
 
   h5 {
@@ -218,8 +230,9 @@
   }
 
   p {
-    @apply font-sans text-base font-normal leading-6;
+    @apply font-sans font-normal;
     @apply [&:not(:first-child)]:mt-6;
+    font-size: 18px;
   }
 
   blockquote {
@@ -304,7 +317,17 @@
 
   /* Add styles for links in prose content */
   .prose a {
-    @apply font-medium text-primary underline underline-offset-4 hover:no-underline;
+    @apply font-medium text-primary underline underline-offset-4;
+  }
+
+  /* Global link styles */
+  a {
+    color: var(--default-color);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--hover-text-color);
   }
 
   /* Code block styling with proper dark mode color mapping */
@@ -565,5 +588,47 @@
   
   .group:hover .group-hover\:text-black {
     color: black;
+  }
+
+  /* Governance card styles */
+  #governance {
+    border-top: 1px solid var(--default-color);
+  }
+  
+  .governance-card {
+    border-bottom: 1px solid var(--default-color);
+    color: var(--default-color); 
+  }
+  
+  .governance-card:hover {
+    color: var(--hover-border-color);
+  }
+  
+  .governance-card:hover .governance-text,
+  .governance-card:hover .governance-icon {
+    color: var(--hover-text-color);
+  }
+
+  /* External link card title styles */
+  .external-link-title {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    transition: color 0.2s ease;
+  }
+
+  .external-link-title:hover {
+    color: var(--hover-text-color);
+  }
+
+  /* Content width utility class */
+  .content-width-responsive {
+    width: 100%; /* Full width on mobile */
+  }
+
+  @media (width >= --theme(--breakpoint-md)) {
+    .content-width-responsive {
+      width: var(--content-width-responsive); /* 4/5 on md+ */
+    }
   }
 }

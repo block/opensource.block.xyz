@@ -25,46 +25,46 @@ const description = "At Block, we believe open source is at the heart of innovat
     title={title}
     tagline={tagline}
     description={description}
+    layout="minimal"
     taglineIconName="block-open-source/block"
   >
-    <div class="text-muted-foreground text-lg">
+    <div class="text-lg">
 
         By collaborating in the open, we create higher quality software, hardware, 
         and protocols through relentless collective examination, and also ensure our systems, 
         hardware, and protocols evolve to meet real-world needs.
-
-        We are committed to building solutions that serve our customers, while enriching the 
-        broader developer community with open, accessible tools. Our open source strategy 
-        emphasizes transparency, collaboration, and shared progress—because building together 
-        empowers everyone.
-
     </div>
+    <div class="text-lg">
+      We are committed to building solutions that serve our customers, while enriching the 
+      broader developer community with open, accessible tools. Our open source strategy 
+      emphasizes transparency, collaboration, and shared progress—because building together 
+      empowers everyone.
+
+  </div>
   </CTASection>
 
   <FeaturedProjects />
 
-  <ContentSection>
+  <ContentSection className="pt-20 content-width-responsive">
 
     <ExploreProjects />
 
   </ContentSection>
 
-  <div class="p-4"/>
+  <div class="p-12"/>
 
-  <OpenSourceContributions />
+  <OpenSourceContributions className="content-width-responsive" />
 
   <ContentSection
-    className="pt-8">
+    className="pt-8 pb-25 content-width-responsive">
 
     <Participate />
 
   </ContentSection>
 
-  <div class="p-4"/>
+  <GovernanceAndStandards className="content-width-responsive"/>
 
-  <GovernanceAndStandards />
-
-  <ContentSection>
+  <ContentSection className="content-width-responsive">
 
     <Foundations />
 
