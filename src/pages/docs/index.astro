@@ -1,5 +1,6 @@
 ---
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
+import { getUrlRelativeToBase } from "@/lib/utils";
 import DocsNavbar from '@/components/docs/DocsNavbar.astro';
 import CTASection from '@/components/block/CTASection.astro';
 
@@ -128,7 +129,7 @@ const headings = [
         </div>
         <h3 class="font-semibold text-lg mb-3">Install</h3>
         <p class="text-muted-foreground text-sm mb-4">Start by following our installation guide to set up your project</p>
-        <a href="/docs-site-kickstarter/docs/installation" class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">Install Now</a>
+        <a href={getUrlRelativeToBase("/docs/installation")} class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">Install Now</a>
       </div>
       
       <div class="p-6 border rounded-lg bg-card hover:shadow-md transition-shadow">
@@ -137,7 +138,7 @@ const headings = [
         </div>
         <h3 class="font-semibold text-lg mb-3">Configure</h3>
         <p class="text-muted-foreground text-sm mb-4">Learn how to configure the template to match your needs</p>
-        <a href="/docs-site-kickstarter/docs/configuration" class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">Configure</a>
+        <a href={getUrlRelativeToBase("/docs/configuration")} class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">Configure</a>
       </div>
       
       <div class="p-6 border rounded-lg bg-card hover:shadow-md transition-shadow">
@@ -146,7 +147,7 @@ const headings = [
         </div>
         <h3 class="font-semibold text-lg mb-3">Customize</h3>
         <p class="text-muted-foreground text-sm mb-4">Explore available components and customize your site</p>
-        <a href="/docs-site-kickstarter/components" class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">View Components</a>
+        <a href={getUrlRelativeToBase("/components")} class="inline-flex items-center justify-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent transition-colors no-underline text-sm">View Components</a>
       </div>
     </div>
 
@@ -226,7 +227,7 @@ const headings = [
 
     <div class="not-prose bg-primary/5 border border-primary/20 rounded-lg p-4 my-6">
       <p class="text-sm">
-        <strong>Need help?</strong> Check out our <a href="/docs-site-kickstarter/docs/configuration" class="text-primary hover:underline">configuration guide</a> for detailed customization instructions.
+        <strong>Need help?</strong> Check out our <a href={getUrlRelativeToBase("/docs/configuration")} class="text-primary hover:underline">configuration guide</a> for detailed customization instructions.
       </p>
     </div>
 
@@ -238,7 +239,7 @@ const headings = [
           Join the Block community and create beautiful documentation sites that your users will love.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="/docs-site-kickstarter/docs/installation" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors no-underline">
+          <a href={getUrlRelativeToBase("/docs/installation")} class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors no-underline">
             Get Started Now
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2">
               <path d="M7 7h10v10"/>

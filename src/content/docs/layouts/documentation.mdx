@@ -4,6 +4,8 @@ description: "The default layout for documentation pages with sidebar navigation
 slug: "documentation-layout"
 ---
 
+import { getUrlRelativeToBase } from "@/lib/utils";
+
 
 The Documentation Layout is the default layout used for most documentation pages. It provides a clean, organized structure that makes it easy for users to navigate and read your documentation.
 
@@ -221,6 +223,6 @@ The Documentation Layout is fully responsive:
 
 ## Related
 
-- [API Layout](/docs-site-kickstarter/docs/api-reference-layout)
-- [Tutorial Layout](/docs-site-kickstarter/docs/tutorial-layout)
-- [Landing Layout](/docs-site-kickstarter/docs/landing-layout)
+- <a href={getUrlRelativeToBase("/docs/api-reference-layout")}>API Layout</a>
+- <a href={getUrlRelativeToBase("/docs/tutorial-layout")}>Tutorial Layout</a>
+- <a href={getUrlRelativeToBase("/docs/landing-layout")}>Landing Layout</a>

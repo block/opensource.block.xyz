@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getUrlRelativeToBase } from "@/lib/utils";
 import CTASection from "@/components/block/CTASection.astro";
+import { getUrlRelativeToBase } from "@/lib/utils";
 
 const title = "Examples Gallery";
 const description = "Showcase of documentation sites built using this project's templates, components, and design system.";
@@ -226,7 +228,7 @@ const exampleSites = [
                   Join the Block community and build documentation that your users will love.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a href="/docs-site-kickstarter/docs/installation" class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors no-underline">
+                  <a href={getUrlRelativeToBase("/docs/installation")} class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors no-underline">
                     Get Started Now
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ml-2">
                       <path d="M7 7h10v10"/>

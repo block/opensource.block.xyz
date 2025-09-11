@@ -5,6 +5,7 @@ slug: "feature-section"
 ---
 
 import FeatureSection from "@/components/block/FeatureSection.astro"
+import { getUrlRelativeToBase } from "@/lib/utils";
 
 
 A versatile section component designed to showcase features, benefits, and key information with flexible layouts and responsive design. Perfect for highlighting product features, service offerings, or any content that needs visual emphasis.
@@ -37,7 +38,7 @@ import FeatureSection from "@/components/block/FeatureSection.astro"
     <li>Customizable themes and components</li>
   </ul>
   
-  <a href="/docs-site-kickstarter/docs/getting-started" class="feature-button">
+  <a href="/docs/getting-started" class="feature-button">
     Get Started
   </a>
 </FeatureSection>
@@ -63,10 +64,10 @@ import FeatureSection from "@/components/block/FeatureSection.astro"
   </ul>
   
   <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-    <a href="/docs-site-kickstarter/docs" class="feature-button">
+    <a href={getUrlRelativeToBase("/docs")} class="feature-button">
       View Documentation
     </a>
-    <a href="/docs-site-kickstarter/examples" class="feature-button-secondary">
+    <a href={getUrlRelativeToBase("/examples")} class="feature-button-secondary">
       See Examples
     </a>
   </div>
@@ -225,10 +226,10 @@ The component provides built-in styling for common content patterns:
 ### Buttons
 ```tsx
 <FeatureSection title="Get Started">
-  <a href="/docs-site-kickstarter/docs" class="feature-button">
+  <a href="/docs" class="feature-button">
     Primary Button
   </a>
-  <a href="/docs-site-kickstarter/examples" class="feature-button-secondary">
+  <a href="/examples" class="feature-button-secondary">
     Secondary Button
   </a>
 </FeatureSection>

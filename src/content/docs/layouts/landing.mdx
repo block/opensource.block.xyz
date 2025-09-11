@@ -4,6 +4,8 @@ description: "A layout designed for documentation home pages and section introdu
 slug: "landing-layout"
 ---
 
+import { getUrlRelativeToBase } from "@/lib/utils";
+
 import { MinimalLanding, FullLanding } from "@/components/docs/landing/LandingExamples"
 import { LayoutDiagram } from "@/components/docs/landing/LayoutDiagram"
 
@@ -266,6 +268,6 @@ The Landing Layout is fully responsive and adapts to different screen sizes:
 
 ## Related
 
-- [Documentation Layout](/docs-site-kickstarter/docs/documentation-layout)
-- [API Layout](/docs-site-kickstarter/docs/api-reference-layout)
-- [Tutorial Layout](/docs-site-kickstarter/docs/tutorial-layout)
+- <a href={getUrlRelativeToBase("/docs/documentation-layout")}>Documentation Layout</a>
+- <a href={getUrlRelativeToBase("/docs/api-reference-layout")}>API Layout</a>
+- <a href={getUrlRelativeToBase("/docs/tutorial-layout")}>Tutorial Layout</a>

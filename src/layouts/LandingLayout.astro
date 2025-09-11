@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
+import { getUrlRelativeToBase } from '../lib/utils';
 
 const { title, description, features = [], quickLinks = [] } = Astro.props;
 
@@ -17,10 +18,10 @@ const frontmatter = Astro.props.frontmatter || {};
         {description && <p class="hero-description">{description}</p>}
         <div class="hero-actions">
           <slot name="hero-actions">
-            <Button variant="default" size="lg" href="/docs-site-kickstarter/docs/getting-started">
+            <Button variant="default" size="lg" href={getUrlRelativeToBase("/docs/getting-started")}>
               Get Started
             </Button>
-            <Button variant="outline" size="lg" href="/docs-site-kickstarter/docs">
+            <Button variant="outline" size="lg" href={getUrlRelativeToBase("/docs")}>
               Documentation
             </Button>
           </slot>

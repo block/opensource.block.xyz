@@ -85,39 +85,51 @@ export function linkChecker(options: LinkCheckerOptions = {}): AstroIntegration 
               // Check internal links
               if (href.startsWith('/')) {
                 let linkToCheck = href;
+                let isValidBaseLink = true;
                 
-                // If the link starts with the base path, remove it for file system checking
-                if (basePath !== '/' && href.startsWith(basePath)) {
-                  linkToCheck = href.substring(basePath.length) || '/';
+                // When base path is not '/', internal links should start with the base path
+                if (basePath !== '/') {
+                  if (href.startsWith(basePath)) {
+                    // Link correctly includes base path, remove it for file system checking
+                    linkToCheck = href.substring(basePath.length) || '/';
+                  } else {
+                    // Link is missing the required base path - this is an error
+                    const relativePath = path.relative(process.cwd(), file);
+                    errors.push(`❌ Internal link missing base path '${basePath}': ${href} in ${relativePath} (should be: ${basePath}${href})`);
+                    isValidBaseLink = false;
+                  }
                 }
                 
-                // Generate possible file paths in the dist directory
-                const possiblePaths = [
-                  // Direct match
-                  path.join(distPath, linkToCheck === '/' ? 'index.html' : `${linkToCheck}.html`),
-                  path.join(distPath, linkToCheck, 'index.html'),
-                  path.join(distPath, linkToCheck),
-                  // Try without intermediate directories (common in Astro content collections)
-                  ...linkToCheck.split('/').length > 2 ? [
-                    path.join(distPath, linkToCheck.split('/').slice(0, -1).join('/'), linkToCheck.split('/').pop() + '.html'),
-                    path.join(distPath, linkToCheck.split('/').slice(0, -1).join('/'), linkToCheck.split('/').pop(), 'index.html'),
-                    // Try flattened structure (remove middle directories)
-                    path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').slice(2).join('-'), 'index.html'),
-                    path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').slice(2).join('-') + '.html'),
-                    // Try just the last part
-                    path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').pop(), 'index.html'),
-                    path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').pop() + '.html')
-                  ] : []
-                ];
-                
-                const exists = possiblePaths.some(p => fs.existsSync(p));
-                
-                if (!exists) {
-                  const relativePath = path.relative(process.cwd(), file);
-                  errors.push(`❌ Broken internal link: ${href} in ${relativePath}`);
+                // Only check file existence if the base path is correct
+                if (isValidBaseLink) {
+                  // Generate possible file paths in the dist directory
+                  const possiblePaths = [
+                    // Direct match
+                    path.join(distPath, linkToCheck === '/' ? 'index.html' : `${linkToCheck}.html`),
+                    path.join(distPath, linkToCheck, 'index.html'),
+                    path.join(distPath, linkToCheck),
+                    // Try without intermediate directories (common in Astro content collections)
+                    ...linkToCheck.split('/').length > 2 ? [
+                      path.join(distPath, linkToCheck.split('/').slice(0, -1).join('/'), linkToCheck.split('/').pop() + '.html'),
+                      path.join(distPath, linkToCheck.split('/').slice(0, -1).join('/'), linkToCheck.split('/').pop(), 'index.html'),
+                      // Try flattened structure (remove middle directories)
+                      path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').slice(2).join('-'), 'index.html'),
+                      path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').slice(2).join('-') + '.html'),
+                      // Try just the last part
+                      path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').pop(), 'index.html'),
+                      path.join(distPath, linkToCheck.split('/')[1], linkToCheck.split('/').pop() + '.html')
+                    ] : []
+                  ];
                   
-                  if (verbose) {
-                    logger.warn(`  Checked paths: ${possiblePaths.slice(0, 5).join(', ')}${possiblePaths.length > 5 ? '...' : ''}`);
+                  const exists = possiblePaths.some(p => fs.existsSync(p));
+                  
+                  if (!exists) {
+                    const relativePath = path.relative(process.cwd(), file);
+                    errors.push(`❌ Broken internal link: ${href} in ${relativePath}`);
+                    
+                    if (verbose) {
+                      logger.warn(`  Checked paths: ${possiblePaths.slice(0, 5).join(', ')}${possiblePaths.length > 5 ? '...' : ''}`);
+                    }
                   }
                 }
               }

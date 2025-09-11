@@ -4,6 +4,8 @@ description: "A layout designed for step-by-step guides and interactive learning
 slug: "tutorial-layout"
 ---
 
+import { getUrlRelativeToBase } from "@/lib/utils";
+
 
 The Tutorial Layout is designed for step-by-step guides and interactive learning experiences. It provides a clear progression path and helps users track their progress through the tutorial.
 
@@ -218,6 +220,6 @@ The Tutorial Layout adapts for different screens:
 
 ## Related
 
-- [Documentation Layout](/docs-site-kickstarter/docs/documentation-layout)
-- [API Layout](/docs-site-kickstarter/docs/api-reference-layout)
-- [Landing Layout](/docs-site-kickstarter/docs/landing-layout)
+- <a href={getUrlRelativeToBase("/docs/documentation-layout")}>Documentation Layout</a>
+- <a href={getUrlRelativeToBase("/docs/api-reference-layout")}>API Layout</a>
+- <a href={getUrlRelativeToBase("/docs/landing-layout")}>Landing Layout</a>
