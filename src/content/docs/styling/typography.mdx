@@ -7,6 +7,7 @@ slug: "typography-styling"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/block/tabs';
 import Accordion from "@/components/block/Accordion.astro"
 import AccordionContent from "@/components/block/AccordionContent.astro"
+import { getUrlRelativeToBase } from "@/lib/utils";
 
 
 Learn how to style typography in your site using our predefined styles and Tailwind CSS utilities.
@@ -264,7 +265,7 @@ This is how a table will render:
   <li>Third item in the list</li>
 </ul>
 
-Note: there is also the <a href={import.meta.env.BASE_URL + "/docs/block-components/checklist"}>Checklist</a> component:
+Note: there is also the <a href={getUrlRelativeToBase("/docs/block-components/checklist")}>Checklist</a> component:
 
 import Checklist from "@/components/block/Checklist.astro"
 
