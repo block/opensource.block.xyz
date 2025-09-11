@@ -12,8 +12,8 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   
-  site: 'https://block.github.io',
-  base: '/docs-site-kickstarter', 
+  site: 'https://opensource.block.xyz',
+  base: '/', 
   
   integrations: [
     icon(),
