@@ -1,38 +1,34 @@
 ---
-// src/pages/about.astro
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogSection from "@/components/blog/BlogSection.astro"
 import { getCollection } from "astro:content";
-import CTASection from '@/components/block/CTASection.astro';
 
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
 const title = "Blog";
-const tagline = "Extra, Extra!"
-const taglineIconName = "newspaper";
 const description = "All the news that's fit to read from the Block Open Source team";
+
+// Extract unique categories from posts
+const allCategories = ["All"];
+const postCategories = [...new Set(posts.flatMap(post => post.data.tags || []))];
+allCategories.push(...postCategories.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1)));
 ---
 
 <BaseLayout title={title} description="Thoughts from the project team">
 
-  <CTASection
-    title={title}
-    tagline={tagline}
-    taglineIconName={taglineIconName}
-    description={description}
-  />
-
   <BlogSection
-    title="Extra, Extra!"
-    description="That's a low blow, Loblaw. Bob Loblaw Law Bomb."
+    title={title}
+    description={description}
     posts={posts}
+    layout="modern"
     showExcerpts={true}
-    showCategories={true}
+    showTags={true}
     showAuthors={true}
     showReadTime={true}
-    layout="list"
+    showCategories={true}
+    categories={allCategories}
+    activeCategory="All"
   />
-
 </BaseLayout>

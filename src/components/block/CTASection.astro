@@ -33,7 +33,7 @@ const {
   secondaryButtonText,
   secondaryButtonHref = "#",
   secondaryButtonIconName,
-  layout = 'centered',
+  layout = 'minimal',
   isDark = false,
   descriptionClasses = `text-xl leading-relaxed m-0 ${isDark ? "text-muted-background" : "text-muted-foreground"}`,
   className = '',
@@ -163,10 +163,15 @@ const sectionClasses = [
       <div class="flex flex-col content-width-responsive">
         <div class="text-content mb-8">
           {tagline && (
-            <h5 class="uppercase text-left mb-0">
-              {tagline}
-            </h5>
-          )}
+          <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-muted text-foreground border border-border w-fit">
+            {taglineIconName && (
+              <div class="pr-2">
+                <Icon name={taglineIconName} class="w-4 h-4"/>
+              </div>
+            )}
+            {tagline}
+          </div>
+        )}
           
           {title && (
             <h1 class="text-left mb-0 mt-0">
@@ -175,9 +180,7 @@ const sectionClasses = [
           )}
           
           {description && (
-            <h3 class="text-left mb-0 mt-3">
-              {description}
-            </h3>
+            <p class="text-xl leading-relaxed m-0 text-muted-foreground" data-astro-cid-apxu3dfi=""> {description} </p>
           )}
         </div>
         

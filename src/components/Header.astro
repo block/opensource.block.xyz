@@ -8,7 +8,7 @@ import { isActivePage } from '@/lib/utils';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
+<header class="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm border-b supports-[backdrop-filter]:bg-background/60">
   <div class="flex h-16 items-center gap-8 px-6">
     <!-- Left Section: Logo + Navigation -->
     <div class="flex items-center gap-8 whitespace-nowrap">
@@ -23,7 +23,7 @@ const currentPath = Astro.url.pathname;
             href={getUrlRelativeToBase(item.href)}
             class={`relative py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground whitespace-nowrap ${
               isActivePage(item.href, currentPath) 
-                ? 'text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-sm' 
+                ? 'text-foreground after:absolute after:top-12 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-sm' 
                 : ''
             }`}
           >

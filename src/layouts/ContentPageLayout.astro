@@ -40,8 +40,6 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
 
 <BaseLayout title={title} description={description}>
   <div class="relative min-h-[calc(100vh-4rem)]">
-    <!-- Light Gray Background -->
-    <div class="absolute inset-0 bg-gray-50"></div>
 
     <!-- Navbar -->
     <div class={`
@@ -100,8 +98,8 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
       </main>
 
       {headings && headings.length > 0 && (
-        <aside class="relative border-l border-slate-200 dark:border-slate-700 bg-background/80 backdrop-blur-sm hidden xl:block">
-          <div class="sticky top-16 h-fit py-6 px-6">
+        <aside class="relative bg-background/80 backdrop-blur-sm hidden xl:block">
+          <div class="sticky top-32 h-fit py-6 px-6">
             <TableOfContents headings={headings} />
           </div>
         </aside>

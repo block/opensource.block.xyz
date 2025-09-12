@@ -27,11 +27,14 @@ interface Props {
   tagline?: string;
   description?: string;
   posts: BlogPost[];
-  layout?: 'grid' | 'list' | 'featured';
+  layout?: 'grid' | 'list' | 'featured' | 'modern';
   showExcerpts?: boolean;
   showTags?: boolean;
   showAuthors?: boolean;
   showReadTime?: boolean;
+  showCategories?: boolean;
+  categories?: string[];
+  activeCategory?: string;
   className?: string;
 }
 
@@ -61,63 +64,115 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/blog/*.
 const getPostURL = (post) => post.data.slug != null ? getUrlRelativeToBase("blog/" + post.data.slug) : "javascript:void(null);";
 ---
 
-<section class={sectionClasses}>
-  <div class="container mx-auto px-6 py-8">
+<section class={`bg-grey-50 text-foreground ${sectionClasses}`}>
+  <div class="container min-w-0 py-8 px-6 mx-auto sm:px-25 sm:py-6">
+
+    <!-- Modern Layout Header -->
+    {layout === 'modern' && (
+      <div class="flex flex-col mb-24 mx-auto md:mb-18">
+        <h1 class="mb-2">{title}</h1>
+        
+        {description && (
+          <p class="text-lg leading-relaxed text-muted-foreground m-0 md:text-base">{description}</p>
+        )}
+      </div>
+    )}
 
     <!-- Blog Posts -->
     {posts.length > 0 && (
-      <div class="blog-posts">
+      <div class={`grid gap-8 ${
+        layout === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto' :
+        layout === 'modern' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' :
+        layout === 'list' ? 'grid-cols-1 max-w-4xl' :
+        layout === 'featured' ? 'grid-cols-1 max-w-6xl mx-auto' : ''
+      }`}>
         {posts.map((post, index) => (
-          <article class={`blog-post ${layout === 'featured' && index === 0 ? 'featured-post' : ''}`}>
+          <article class={`bg-card rounded-xl overflow-hidden transition-all duration-200 flex flex-col hover:shadow-lg ${
+            layout === 'list' ? 'flex-row items-center md:flex-col' :
+            layout === 'featured' && index === 0 ? 'col-span-full flex-row items-center p-8 md:flex-col md:p-6' : ''
+          }`}>
             {post.data.image && (
-              <div class="post-image">
+              <div class={`relative overflow-hidden ${
+                layout === 'grid' || (layout === 'featured' && index !== 0) ? 'aspect-video' :
+                layout === 'list' || (layout === 'featured' && index === 0) ? 'w-80 h-48 flex-shrink-0 md:w-full md:h-48' :
+                layout === 'modern' ? 'aspect-video' : ''
+              }`}>
                 <a href={getPostURL(post)}>
                   <Image 
                     src={images[imagePath + post.data.image]()}
                     alt={post.data.title}
                     width={800}
                     height={600}
+                    class="w-full h-full object-cover"
                   />
                 </a>
+                
+                <!-- Image Overlay for Modern Layout -->
+                {layout === 'modern' && (
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex justify-between items-end">
+                    <div class="flex flex-col gap-1">
+                      <span class="text-white text-sm font-medium">{formatDate(post.data.date)}</span>
+                      {showReadTime && post.data.readTime && (
+                        <span class="text-white text-sm font-medium">{post.data.readTime}</span>
+                      )}
+                    </div>
+                    <div class="flex items-center">
+                      {showTags && post.data.tags && post.data.tags[0] && (
+                        <span class="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">{post.data.tags[0]}</span>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             
-            <div class="post-content">
-              <div class="post-meta">
-
-                {showTags && post.data.tags && (
-                  post.data.tags.map((tag, index) => (
-                    <span class="post-category">{tag}</span>
-                  ))
+            <div class={`flex-1 flex flex-col gap-4 ${
+              layout === 'featured' && index === 0 ? 'pl-8 md:pl-0' : 'p-6'
+            }`}>
+              {/* Regular meta for non-modern layouts */}
+              {layout !== 'modern' && (
+                <div class="flex items-center gap-4 text-sm text-muted-foreground flex-wrap">
+                  {showTags && post.data.tags && (
+                    post.data.tags.map((tag, index) => (
+                      <span class="bg-primary/10 text-primary px-3 py-1 rounded-full font-medium text-xs">{tag}</span>
+                    ))
+                  )}
                   
-                )}
-                
-                <time class="post-date" datetime={post.data.date}>
-                  {formatDate(post.data.date)}
-                </time>
-                
-                {showReadTime && post.data.readTime && (
-                  <span class="post-read-time">{post.data.readTime}</span>
-                )}
-              </div>
+                  <time class="text-sm" datetime={post.data.date}>
+                    {formatDate(post.data.date)}
+                  </time>
+                  
+                  {showReadTime && post.data.readTime && (
+                    <span class="text-sm">{post.data.readTime}</span>
+                  )}
+                </div>
+              )}
               
-              <h3 class="post-title">
-                <a href={getPostURL(post)}>{post.data.title}</a>
+              <h3 class={`font-semibold leading-snug m-0 ${
+                layout === 'featured' && index === 0 ? 'text-3xl md:text-2xl' : 'text-xl'
+              }`}>
+                <a href={getPostURL(post)} class="text-foreground no-underline transition-colors duration-200 hover:text-primary">{post.data.title}</a>
               </h3>
               
               {showExcerpts && post.data.excerpt && (
-                <p class="post-excerpt">{post.data.excerpt}</p>
+                <p class="text-muted-foreground leading-relaxed m-0 flex-1">{post.data.excerpt}</p>
               )}
               
-              <div class="post-footer">
+              <div class={`flex justify-between items-center mt-auto text-sm ${
+                layout === 'modern' ? 'flex-col items-start gap-2' : 'md:flex-col md:items-start md:gap-2'
+              }`}>
                 {showAuthors && post.data.author && (
-                  <span class="post-author">By {post.data.author}</span>
+                  <span class="text-muted-foreground">By {post.data.author}</span>
                 )}
                 
-                <a href={getPostURL(post)} class="post-link">
-                  Read more
-                  <svg class="link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                <a href={getPostURL(post)} class={`flex items-center gap-2 text-primary no-underline font-medium transition-all duration-200 self-start hover:gap-3`}>
+                  {layout === 'modern' ? 'Read Post' : 'Read more'}
+                  <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {layout === 'modern' ? (
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17" />
+                    ) : (
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    )}
                   </svg>
                 </a>
               </div>
@@ -128,335 +183,9 @@ const getPostURL = (post) => post.data.slug != null ? getUrlRelativeToBase("blog
     )}
     
     <!-- Custom slot for additional content -->
-    <div class="blog-extra">
+    <div class="mt-16 flex justify-center">
       <slot />
     </div>
   </div>
 </section>
 
-<style>
-  .blog-section {
-    background: hsl(var(--background));
-    color: hsl(var(--foreground));
-  }
-  
-  /* Header Styles */
-  .blog-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-    max-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .blog-tagline {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    background: hsl(var(--muted));
-    color: hsl(var(--muted-foreground));
-    border: 1px solid hsl(var(--border));
-  }
-  
-  .blog-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: hsl(var(--foreground));
-    margin: 0;
-  }
-  
-  .blog-description {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: hsl(var(--muted-foreground));
-    margin: 0;
-  }
-  
-  /* Blog Posts Grid */
-  .blog-posts {
-    display: grid;
-    gap: 2rem;
-  }
-  
-  .layout-grid .blog-posts {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .layout-list .blog-posts {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .layout-featured .blog-posts {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Blog Post Styles */
-  .blog-post {
-    background: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
-    border-radius: 0.75rem;
-    overflow: hidden;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .blog-post:hover {
-    box-shadow: 
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
-  }
-  
-  .layout-list .blog-post {
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .layout-featured .featured-post {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    align-items: center;
-    padding: 2rem;
-  }
-  
-  /* Post Image */
-  .post-image {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .layout-grid .post-image,
-  .layout-featured .blog-post:not(.featured-post) .post-image {
-    aspect-ratio: 16 / 9;
-  }
-  
-  .layout-list .post-image,
-  .layout-featured .featured-post .post-image {
-    width: 300px;
-    height: 200px;
-    flex-shrink: 0;
-  }
-  
-  .post-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .post-image:hover img {
-    transform: scale(1.05);
-  }
-  
-  /* Post Content */
-  .post-content {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .layout-featured .featured-post .post-content {
-    padding: 0 0 0 2rem;
-  }
-  
-  /* Post Meta */
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.875rem;
-    color: hsl(var(--muted-foreground));
-    flex-wrap: wrap;
-  }
-  
-  .post-category {
-    background: hsl(var(--primary) / 0.1);
-    color: hsl(var(--primary));
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    font-weight: 500;
-    font-size: 0.75rem;
-  }
-  
-  .post-date,
-  .post-read-time {
-    font-size: 0.875rem;
-  }
-  
-  /* Post Title */
-  .post-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin: 0;
-  }
-  
-  .layout-featured .featured-post .post-title {
-    font-size: 1.875rem;
-  }
-  
-  .post-title a {
-    color: hsl(var(--foreground));
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  .post-title a:hover {
-    color: hsl(var(--primary));
-  }
-  
-  /* Post Excerpt */
-  .post-excerpt {
-    color: hsl(var(--muted-foreground));
-    line-height: 1.6;
-    margin: 0;
-    flex: 1;
-  }
-  
-  /* Post Footer */
-  .post-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    font-size: 0.875rem;
-  }
-  
-  .post-author {
-    color: hsl(var(--muted-foreground));
-  }
-  
-  .post-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: hsl(var(--primary));
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  .post-link:hover {
-    gap: 0.75rem;
-  }
-  
-  .link-icon {
-    width: 1rem;
-    height: 1rem;
-    transition: transform 0.2s ease;
-  }
-  
-  .post-link:hover .link-icon {
-    transform: translateX(2px);
-  }
-  
-  /* Blog Extra */
-  .blog-extra {
-    margin-top: 4rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .layout-grid .blog-posts {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      max-width: 900px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .blog-title {
-      font-size: 2rem;
-    }
-    
-    .blog-description {
-      font-size: 1rem;
-    }
-    
-    .layout-grid .blog-posts {
-      grid-template-columns: 1fr;
-      max-width: 600px;
-    }
-    
-    .layout-list .blog-post,
-    .layout-featured .featured-post {
-      flex-direction: column;
-    }
-    
-    .layout-list .post-image,
-    .layout-featured .featured-post .post-image {
-      width: 100%;
-      height: 200px;
-    }
-    
-    .layout-featured .featured-post .post-content {
-      padding: 1.5rem;
-    }
-    
-    .layout-featured .featured-post .post-title {
-      font-size: 1.5rem;
-    }
-    
-    .post-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .blog-header {
-      margin-bottom: 3rem;
-    }
-    
-    .blog-title {
-      font-size: 1.75rem;
-    }
-    
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
-  }
-  
-  /* Global slot content styling */
-  .blog-extra :global(.blog-cta) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    text-decoration: none;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  .blog-extra :global(.blog-cta:hover) {
-    background: hsl(var(--primary) / 0.9);
-    transform: translateY(-1px);
-  }
-</style>
