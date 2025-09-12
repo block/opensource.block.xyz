@@ -1,213 +1,88 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import DocumentIcon from '@/pages/home/DocumentIcon.astro';
-import FeatureCard from "@/components/block/FeatureCard.astro";
-import Hero from "@/components/block/Hero.astro";
-import Checklist from "@/components/block/Checklist.astro";
-import CTASection from "@/components/block/CTASection.astro";
+import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
+import CTASection from '@/components/block/CTASection.astro';
+import ExploreProjects from "@/components/blockopensource/ExploreProjects.astro";
+import Foundations from "@/components/blockopensource/Foundations.astro";
+import ContentSection from "@/components/block/ContentSection.astro";
+import FeaturedProjects from "@/components/blockopensource/FeaturedProjects.astro";
+import OpenSourceContributions from "@/components/blockopensource/OpenSourceContributions.astro";
+import GovernanceAndStandards from "@/components/blockopensource/GovernanceAndStandards.astro";
+import Participate from "@/components/blockopensource/Participate.astro";
+
+const pageTitle = "Block - Open Source";
+const title = "Our Vision for Open Source";
+const tagline = "Block Open Source";
+const description = "At Block, we believe open source is at the heart of innovation and community empowerment. Our vision is to nurture a diverse and vibrant open source ecosystem that removes barriers to technology and fosters economic opportunities for all.";
+
 ---
 
-<BaseLayout
-  title="Block Documentation Template"
-  description="This template helps you build documentation sites with Astro, Tailwind CSS, and Shadcn UI."
+<ContentPageLayout title={pageTitle}
+  showBreadcrumbs={false}
+  showTitleAsH1={false}
 >
-  <div class="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-background">
-    <!-- Background Elements -->
-    <div class="absolute inset-0 bg-grid-slate-200/20 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.5),rgba(255,255,255,0.8))] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,0.5),rgba(0,0,0,0.8))]"></div>
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="subtle-orb"></div>
+
+  <CTASection
+    title={title}
+    tagline={tagline}
+    description={description}
+    layout="minimal"
+    taglineIconName="block-open-source/block"
+  >
+    <div class="text-lg">
+
+        By collaborating in the open, we create higher quality software, hardware, 
+        and protocols through relentless collective examination, and also ensure our systems, 
+        hardware, and protocols evolve to meet real-world needs.
     </div>
+    <div class="text-lg">
+      We are committed to building solutions that serve our customers, while enriching the 
+      broader developer community with open, accessible tools. Our open source strategy 
+      emphasizes transparency, collaboration, and shared progress—because building together 
+      empowers everyone.
 
-    <Hero
-      image={DocumentIcon}
-      headline="Block Documentation Template"
-      cta="Scroll to learn more">
-
-      Create beautiful, accessible, and consistent documentation sites for your Block projects. 
-      Built with modern tools, ready for your content.
-
-    </Hero>
-
-    <!-- Steps Section -->
-    <section class="container relative py-20 space-y-32">
-      <!-- Step 1: Installation -->
-      <FeatureCard
-        label="Step 1"
-        headline="Quick Installation"
-        description="Get started in seconds with our pre-configured template. Just clone, install, and start building."
-      >
-          <pre class="language-bash rounded-lg p-4 bg-card/40 backdrop-blur-sm overflow-x-auto"><code>git clone https://github.com/block/docs-site-kickstarter.git my-docs
-cd my-docs
-pnpm install
-pnpm dev</code></pre>
-        <div slot="content">
-          <Checklist items={[
-            "Modern Stack with Astro & React",
-            "Pre-configured Tailwind CSS",
-            "Built-in Dark Mode Support"
-          ]} />
-        </div>
-      </FeatureCard>
-
-      <!-- Step 2: Create Content -->
-      <FeatureCard
-        label="Step 2"
-        headline="Create Your Content"
-        description="Write documentation using MDX - the perfect blend of Markdown and React components."
-      >
-      <pre class="language-mdx rounded-lg p-4 bg-card/40 backdrop-blur-sm overflow-x-auto"><code>---
-title: "Getting Started"
-description: "Learn how to use our template"
----
-
-# Welcome to Your Docs
-
-## Features
-
-- ✨ **Modern Stack** - Built with Astro and React
-- 🎨 **Beautiful Design** - Customizable themes
-- 📱 **Responsive** - Works on all devices
-
-## Quick Start
-
-1. Clone the repository
-2. Install dependencies
-3. Start writing!</code></pre>
-        <div slot="content">
-          <Checklist items={[
-            "MDX Support Built-in",
-            "Interactive Components",
-            "Auto-generated Navigation"
-          ]} />
-        </div>
-      </FeatureCard>
-
-
-      <!-- Step 3: Customize -->
-      <FeatureCard
-        label="Step 3"
-        headline="Customize & Extend"
-        description="Add components, modify styles, and make it your own with our flexible template."
-      >
-        <div class="grid grid-cols-2 gap-4">
-          <div class="rounded-lg border bg-card/80 backdrop-blur-sm p-4">
-            <h4 class="font-semibold mb-2">UI Components</h4>
-            <p class="text-sm text-muted-foreground">Pre-built components for common use cases</p>
-          </div>
-          <div class="rounded-lg border bg-card/80 backdrop-blur-sm p-4">
-            <h4 class="font-semibold mb-2">Styling</h4>
-            <p class="text-sm text-muted-foreground">Tailwind CSS for easy customization</p>
-          </div>
-        </div>
-        <div slot="content">
-          <Checklist items={[
-            "Customizable Components",
-            "Flexible Layout System",
-            "Easy Theme Customization"
-          ]} />
-        </div>
-      </FeatureCard>
-
-      <!-- Step 4: Deploy -->
-      <FeatureCard
-        label="Step 4"
-        headline="Deploy Anywhere"
-        description="Deploy your documentation site to your favorite hosting platform with ease."
-      >
-        <div class="grid grid-cols-2 gap-4">
-          <div class="flex items-center justify-center rounded-lg border bg-card/80 backdrop-blur-sm p-4">
-            <span class="font-semibold">Vercel</span>
-          </div>
-          <div class="flex items-center justify-center rounded-lg border bg-card/80 backdrop-blur-sm p-4">
-            <span class="font-semibold">Netlify</span>
-          </div>
-        </div>
-        <div slot="content">
-          <Checklist items={[
-            "One-click Deployment",
-            "Automatic Updates",
-            "HTTPS & CDN Included"
-          ]} />
-        </div>
-      </FeatureCard>
-
-      <!-- CTA Section -->
-      <CTASection
-        title="Ready to Build Your Documentation?"
-        description="Start creating beautiful documentation sites for your Block projects today."
-        primaryButtonText="Get Started"
-        primaryButtonHref="/docs"
-        secondaryButtonText="View on GitHub"
-        secondaryButtonHref="https://github.com/block/docs-site-kickstarter"
-      />
-    </section>
   </div>
-</BaseLayout>
+  </CTASection>
+
+  <FeaturedProjects />
+
+  <ContentSection className="pt-20 content-width-responsive">
+
+    <ExploreProjects />
+
+  </ContentSection>
+
+  <div class="p-12"/>
+
+  <OpenSourceContributions className="content-width-responsive" />
+
+  <ContentSection
+    className="pt-8 pb-25 content-width-responsive">
+
+    <Participate />
+
+  </ContentSection>
+
+  <GovernanceAndStandards className="content-width-responsive"/>
+
+  <ContentSection className="content-width-responsive">
+
+    <Foundations />
+
+  </ContentSection>
+
+</ContentPageLayout>
 
 <style>
-  .bg-grid-slate-200\/20 {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.2)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  /* Content width utility class */
+  .content-width-responsive {
+    @apply w-full;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .bg-grid-slate-200\/20 {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-    }
-  }
-
-  /* Subtle Gradient Orb */
-  .subtle-orb {
-    position: absolute;
-    width: 800px;
-    height: 800px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, rgba(var(--foreground-rgb), 0.03), rgba(var(--foreground-rgb), 0.01));
-    filter: blur(100px);
-    animation: subtleFloat 30s ease-in-out infinite;
-    opacity: 0.3;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* Animations */
-  @keyframes subtleFloat {
-    0%, 100% { transform: translate(-50%, -50%); }
-    50% { transform: translate(-45%, -48%); }
-  }
-
-  /* Dark Mode Support */
-  :root {
-    --foreground-rgb: 0, 0, 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --foreground-rgb: 255, 255, 255;
-    }
-  }
-
-  /* Reduced Motion */
-  @media (prefers-reduced-motion: reduce) {
-    .subtle-orb {
-      animation: none;
+  @media (min-width: theme('screens.md')) {
+    .content-width-responsive {
+      width: var(--content-width-responsive); /* 4/5 on md+ */
+      background-color: blue;
     }
   }
 </style>
 
-<script>
-  // Intersection Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  document.querySelectorAll('.animate-on-scroll').forEach((element) => {
-    observer.observe(element);
-  });
-</script>

@@ -1,7 +1,5 @@
 ---
 import { MobileNavigation } from "./MobileNavigation";
-import DocsNavbar from "./DocsNavbar.astro";
-import ComponentsNavbar from "./ComponentsNavbar.astro";
 import { mainNavigation } from "@/data/navigation";
 import { getUrlRelativeToBase } from "@/lib/utils";
 import Brand from "../Brand.astro";
@@ -12,9 +10,6 @@ const { } = Astro.props;
 
 const currentPath = Astro.url.pathname;
 
-// Determine which navbar to show based on current path
-const showDocsNavbar = currentPath.startsWith(getUrlRelativeToBase('/docs'));
-const showComponentsNavbar = currentPath.startsWith(getUrlRelativeToBase('/components'));
 ---
 
 <MobileNavigation client:load currentPath={currentPath}>
@@ -40,9 +35,6 @@ const showComponentsNavbar = currentPath.startsWith(getUrlRelativeToBase('/compo
     </div>
   </div>
   
-  <!-- Conditional Navigation -->
-  {showDocsNavbar && <DocsNavbar />}
-  {showComponentsNavbar && <ComponentsNavbar /> }
 </MobileNavigation>
 
 <style>

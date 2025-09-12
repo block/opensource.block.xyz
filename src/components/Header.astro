@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from "@/components/ThemeToggle.astro";
 import MobileNav from "@/components/docs/MobileNav.astro";
 import Brand from '@/components/Brand.astro';
 import { getUrlRelativeToBase } from "@/lib/utils";
@@ -9,20 +8,24 @@ import { isActivePage } from '@/lib/utils';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="header-wrapper">
-  <div class="header-container">
+<header class="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
+  <div class="flex h-16 items-center gap-8 px-6">
     <!-- Left Section: Logo + Navigation -->
-    <div class="header-left whitespace-nowrap">
+    <div class="flex items-center gap-8 whitespace-nowrap">
       <MobileNav />
       
       <Brand />
 
       <!-- Desktop Navigation -->
-      <nav class="desktop-nav whitespace-nowrap">
+      <nav class="hidden items-center gap-6 whitespace-nowrap lg:flex">
         {mainNavigation[0].items.map((item) => (
           <a
             href={getUrlRelativeToBase(item.href)}
-            class={`nav-link whitespace-nowrap ${isActivePage(item.href, currentPath) ? 'nav-link-active' : ''}`}
+            class={`relative py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground whitespace-nowrap ${
+              isActivePage(item.href, currentPath) 
+                ? 'text-foreground after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-sm' 
+                : ''
+            }`}
           >
             {item.title}
           </a>
@@ -30,153 +33,11 @@ const currentPath = Astro.url.pathname;
       </nav>
     </div>
 
-    <!-- Right Section: Actions -->
-    <div class="header-right whitespace-nowrap">
-      <!-- External Links -->
-      <div class="external-links whitespace-nowrap">
-        <a
-          href="https://github.com/block/docs-site-kickstarter"
-          target="_blank"
-          rel="noreferrer"
-          class="external-link whitespace-nowrap"
-          title="View on GitHub"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
-      </div>
-
+    <!-- Right Section: Actions (if needed in future) -->
+    <div class="ml-auto flex items-center gap-4 whitespace-nowrap">
       <!-- <ThemeToggle /> -->
     </div>
   </div>
 </header>
 
-<style>
-  .header-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    width: 100%;
-    background-color: hsl(var(--background) / 0.95);
-    backdrop-filter: blur(8px);
-  }
 
-  @supports (backdrop-filter: blur(8px)) {
-    .header-wrapper {
-      background-color: hsl(var(--background) / 0.6);
-    }
-  }
-
-  .header-container {
-    max-width: 1800px; /* Increased from 1600px */
-    margin: 0 auto;
-    padding: 0 1.5rem; /* Increased padding */
-    display: flex;
-    height: 64px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex: 1;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  /* Desktop Navigation */
-  .desktop-nav {
-    display: none;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .desktop-nav {
-      display: flex;
-    }
-  }
-
-  .nav-link {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: hsl(var(--muted-foreground));
-    position: relative;
-    padding: 0.5rem 0;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .nav-link:hover {
-    color: hsl(var(--foreground));
-  }
-
-  .nav-link-active {
-    color: hsl(var(--foreground));
-  }
-
-  .nav-link-active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: hsl(var(--primary));
-    border-radius: 1px;
-  }
-
-  /* External Links */
-  .external-links {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .external-link {
-    padding: 0.5rem;
-    color: hsl(var(--muted-foreground));
-    text-decoration: none;
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-  }
-
-  .external-link:hover {
-    color: hsl(var(--foreground));
-    background-color: hsl(var(--muted) / 0.5);
-  }
-
-  /* Mobile Responsive */
-  @media (max-width: 768px) {
-    .header-container {
-      padding: 0 1rem;
-      gap: 1rem;
-    }
-
-    .header-left {
-      gap: 1rem;
-    }
-
-    .brand-text {
-      display: none;
-    }
-
-    .external-links {
-      gap: 0.25rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .header-container {
-      padding: 0 0.75rem;
-    }
-  }
-</style>
