@@ -1,5 +1,5 @@
 ---
-import GovernanceCard from '@/components/block/GovernanceCard.astro';
+import GovernanceCard from '@/components/blockopensource/GovernanceCard.astro';
 
 export interface GovernanceLink {
   name: string;
@@ -28,7 +28,7 @@ const {
       <slot />
     </p>
     {subtitle && <h3 class="mt-15 mb-0">{subtitle}</h3>}
-    <div id="governance" class="mt-15 grid grid-cols-1 gap-y-0 pt-0 pb-6 md:pb-8">
+    <div class="mt-15 grid grid-cols-1 gap-y-0 pt-0 pb-6 md:pb-8 border-t border-[var(--default-color)]">
         {governanceLinks.map((governanceLink) => (
             <GovernanceCard 
               title={governanceLink.name}
@@ -38,3 +38,4 @@ const {
         ))}
     </div>
 </section>
+

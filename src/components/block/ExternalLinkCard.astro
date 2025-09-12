@@ -1,7 +1,6 @@
 ---
 
 import ContentSection from '@/components/block/ContentSection.astro';
-import Icon from './Icon.astro';
 
 interface Props {
   title: string;
@@ -25,7 +24,7 @@ const {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="external-link-title"
+                    class="text-current underline decoration-current transition-colors duration-200 hover:text-[var(--hover-text-color)]"
                 >
                     {title}
                 </a>
@@ -36,3 +35,4 @@ const {
         </div>
     </div>
 </ContentSection>
+

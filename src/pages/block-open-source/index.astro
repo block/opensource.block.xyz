@@ -72,3 +72,17 @@ const description = "At Block, we believe open source is at the heart of innovat
 
 </ContentPageLayout>
 
+<style>
+  /* Content width utility class */
+  .content-width-responsive {
+    @apply w-full;
+  }
+
+  @media (min-width: theme('screens.md')) {
+    .content-width-responsive {
+      width: var(--content-width-responsive); /* 4/5 on md+ */
+      background-color: blue;
+    }
+  }
+</style>
+

@@ -1,0 +1,40 @@
+---
+
+import ContentSection from '@/components/block/ContentSection.astro';
+import Icon from '@/components/block/Icon.astro';
+
+interface Props {
+  title: string;
+  href: string;
+  description: string;
+}
+
+const { 
+  title,
+  href,
+  description
+} = Astro.props;
+---
+
+<ContentSection
+    hasDefaultInnerStyles={false}>
+    <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group h-full py-8 flex items-center justify-between no-underline transition-colors duration-200 cursor-pointer border-b border-[var(--default-color)] text-[var(--default-color)] hover:text-[var(--hover-border-color)]"
+    >
+        <div class="flex-1 mr-9 grid grid-cols-[200px_1fr] gap-10 items-center py-2">
+            <h4 class="text-left mt-0 mb-0 transition-colors duration-200 group-hover:text-[var(--hover-text-color)]">
+                {title}
+            </h4>
+            <h4 class="font-normal mt-0 mb-0 transition-colors duration-200 group-hover:text-[var(--hover-text-color)]">
+                {description}
+            </h4>
+        </div>
+        <div class="flex-shrink-0 transition-transform duration-200 group-hover:scale-120 group-hover:text-[var(--hover-text-color)]">
+            <Icon name="arrow-right" />
+        </div>
+    </a>
+</ContentSection>
+

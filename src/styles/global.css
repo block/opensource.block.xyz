@@ -589,46 +589,4 @@
   .group:hover .group-hover\:text-black {
     color: black;
   }
-
-  /* Governance card styles */
-  #governance {
-    border-top: 1px solid var(--default-color);
-  }
-  
-  .governance-card {
-    border-bottom: 1px solid var(--default-color);
-    color: var(--default-color); 
-  }
-  
-  .governance-card:hover {
-    color: var(--hover-border-color);
-  }
-  
-  .governance-card:hover .governance-text,
-  .governance-card:hover .governance-icon {
-    color: var(--hover-text-color);
-  }
-
-  /* External link card title styles */
-  .external-link-title {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: currentColor;
-    transition: color 0.2s ease;
-  }
-
-  .external-link-title:hover {
-    color: var(--hover-text-color);
-  }
-
-  /* Content width utility class */
-  .content-width-responsive {
-    width: 100%; /* Full width on mobile */
-  }
-
-  @media (width >= --theme(--breakpoint-md)) {
-    .content-width-responsive {
-      width: var(--content-width-responsive); /* 4/5 on md+ */
-    }
-  }
 }
