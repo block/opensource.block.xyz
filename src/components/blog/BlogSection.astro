@@ -2,6 +2,7 @@
 import { formatDate } from '@/components/blog/blogUtils';
 import { Image } from 'astro:assets';
 import { getUrlRelativeToBase } from '@/lib/utils';
+import { getCollection } from 'astro:content';
 
 interface Props {
    imagePath: string;
@@ -62,6 +63,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/blog/*.
 
 // Set the postURL only if the post exists in Content Collections and has an ID; else set it to NO-OP; this is used in examples docs
 const getPostURL = (post) => post.data.slug != null ? getUrlRelativeToBase("blog/" + post.data.slug) : "javascript:void(null);";
+
+// Get all authors to map author IDs to names
+const authors = await getCollection('authors');
+const getAuthorName = (authorId: string) => {
+  const author = authors.find(a => a.id === authorId);
+  return author?.data?.name || authorId;
+};
 ---
 
 <section class={`bg-grey-50 text-foreground ${sectionClasses}`}>
@@ -162,7 +170,7 @@ const getPostURL = (post) => post.data.slug != null ? getUrlRelativeToBase("blog
                 layout === 'modern' ? 'flex-col items-start gap-2' : 'md:flex-col md:items-start md:gap-2'
               }`}>
                 {showAuthors && post.data.author && (
-                  <span class="text-muted-foreground">By {post.data.author}</span>
+                  <span class="text-muted-foreground">By {getAuthorName(post.data.author)}</span>
                 )}
                 
                 <a href={getPostURL(post)} class={`flex items-center gap-2 text-primary no-underline font-medium transition-all duration-200 self-start hover:gap-3`}>

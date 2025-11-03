@@ -3,16 +3,21 @@
       "name": "Andrew Lee Rubinger",
       "title": "Lead, Open Source Program Office, Block",
       "social-github": "ALRubinger",
-      "social-linkedin": "alrubinger",
+      "social-linkedin": "in/alrubinger",
       "social-x": "ALRubinger",
       "avatar" : "alrubinger.jpg"
     },
-    "angiejones" : {
-      "name": "Angie Jones",
-      "title": "Head of Developer Programs, Block",
-      "social-github": "angiejones",
-      "social-linkedin": "angiejones",
-      "social-x": "angiejones",
-      "avatar" : "angiejones.png"
+    "block" : {
+      "name": "Block",
+      "social-github": "block",
+      "social-linkedin": "company/joinblock",
+      "social-x": "blocks",
+      "avatar" : "block-logo.png"
+    },
+    "block-ospo" : {
+      "name": "Block Open Source",
+      "social-github": "block",
+      "social-x": "blockopensource",
+      "avatar" : "block-logo.png"
     }
 }

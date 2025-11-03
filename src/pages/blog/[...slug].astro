@@ -61,23 +61,23 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
   maxWidth="wide"
 	showTitleAsH1={false}>
 
-	<div class="flex flex-col lg:flex-row gap-6 mb-2 border rounded-md bg-muted">
+	<div class="flex flex-col lg:flex-row mb-2 border rounded-md bg-muted overflow-hidden">
 		
-		<div class="flex-1 ml-6 lg:ml-6 ml-0 p-4 lg:p-0">
-			<h1 class="pb-0 mb-0 text-muted-background">{title}</h1>
+		<div class="flex-1 ml-6 lg:ml-6 ml-0 p-4 lg:p-6">
+			<h1 class="pb-0 mb-0 text-muted-background leading-tight">{title}</h1>
 			<p class="italic mt-1 pb-0 text-sm">
 				Published on <b>{date}</b>
 			</p>
       <AuthorCard author={author}/>
 	  </div>
 		{post.data.image && (
-		<div class="flex-none order-last lg:order-none lg:max-w-xs">
+		<div class="flex-none order-last lg:order-none lg:max-w-xs lg:self-stretch">
 			<Image 
 				src={images[imagePath]()}
 				alt={post.data.title}
 				width={800}
 				height={600}
-				class="w-full object-cover rounded-b-md lg:rounded-bl-none lg:rounded-tr-md"
+				class="w-full h-full object-cover"
 			/>
 		</div>
 		)}

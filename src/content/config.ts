@@ -20,7 +20,7 @@ export const collections = {
     loader: file("./src/content/blog/authors.json"),
     schema: z.object({
       name: z.string(),
-      title: z.string(),
+      title: z.string().optional(),
       'social-github': z.string().optional(),
       'social-linkedin': z.string().optional(),
       'social-x': z.string().optional(),

@@ -1,0 +1,229 @@
+---
+title: "Block Open Source Introduces \"codename goose\" — an Open Framework for AI Agents"
+author: block
+date: "2025-01-28"
+slug: "introducing-goose"
+excerpt: "Developed by Block engineers, codename goose allows developers (and soon, anyone) to turn LLM output into real-world action."
+image: "goose-announcement.png"
+tags: ["ai", "open source", "agents"]
+readTime: "7 minutes"
+---
+
+Today, Block Open Source is excited to introduce **codename goose** — an open source framework for building AI agents that can take real-world actions on your behalf.
+
+## What is goose?
+
+goose is an AI agent framework that bridges the gap between large language models (LLMs) and the tools you use every day. While LLMs are great at understanding and generating text, they can't directly interact with your development environment, run commands, or modify files. goose changes that.
+
+With goose, you can:
+
+- **Ask questions** and get answers grounded in your codebase
+- **Generate code** that integrates seamlessly with your project
+- **Run commands** and see the results without leaving your conversation
+- **Modify files** with natural language instructions
+- **Debug issues** by having goose investigate and propose fixes
+
+## Why We Built goose
+
+At Block, our engineers spend significant time on tasks that could be automated or assisted by AI:
+
+- Navigating large codebases
+- Writing boilerplate code
+- Running tests and interpreting results
+- Debugging production issues
+- Documenting code and systems
+
+We built goose to make these tasks faster and more enjoyable. But we also had broader goals:
+
+### Developer Control
+
+We wanted developers to remain in control. goose suggests actions but always asks for confirmation before making changes. You're the pilot; goose is the copilot.
+
+### Extensibility
+
+Every team has different tools and workflows. goose is designed to be extended with custom toolkits that integrate with your specific environment.
+
+### Transparency
+
+As an open source project, goose's behavior is transparent and auditable. You can see exactly what it's doing and why.
+
+### Privacy
+
+goose runs locally by default. Your code and conversations don't need to leave your machine unless you choose to use cloud-based LLMs.
+
+## How goose Works
+
+goose combines several key components:
+
+### LLM Integration
+
+goose works with multiple LLM providers, including OpenAI, Anthropic, and local models. You choose which model to use based on your needs and preferences.
+
+### Toolkit System
+
+Toolkits give goose capabilities. Out of the box, goose includes toolkits for:
+
+- **File operations** - Reading, writing, and modifying files
+- **Shell commands** - Running terminal commands and scripts
+- **Code analysis** - Understanding and navigating codebases
+- **Web browsing** - Fetching information from the internet
+- **Git operations** - Managing version control
+
+You can also create custom toolkits for your specific needs.
+
+### Session Management
+
+goose maintains context across conversations, remembering what you've discussed and what actions have been taken. This makes multi-step tasks feel natural and conversational.
+
+### Safety and Confirmation
+
+Before taking any action that could modify your system, goose asks for confirmation. You can review the proposed action and approve or reject it.
+
+## Getting Started
+
+Installing goose is simple:
+
+```bash
+pip install goose-ai
+```
+
+Then start a session:
+
+```bash
+goose session start
+```
+
+goose will guide you through configuration, including setting up your LLM provider and choosing which toolkits to enable.
+
+## Example Use Cases
+
+Here are some ways developers are already using goose:
+
+### Code Review Assistant
+
+"Review this pull request and identify potential issues"
+
+goose can analyze code changes, check for common mistakes, and suggest improvements.
+
+### Debugging Helper
+
+"The tests are failing in CI but passing locally. Help me figure out why."
+
+goose can investigate test failures, check environment differences, and propose solutions.
+
+### Documentation Generator
+
+"Generate API documentation for this module"
+
+goose can analyze code and produce comprehensive documentation in your preferred format.
+
+### Refactoring Support
+
+"Refactor this class to use dependency injection"
+
+goose can suggest refactoring approaches and even implement them with your approval.
+
+## Extensibility: Building Custom Toolkits
+
+One of goose's most powerful features is its extensibility. You can create custom toolkits that integrate with your team's specific tools and workflows.
+
+A toolkit is simply a Python class that implements the toolkit interface:
+
+```python
+from goose.toolkit import Toolkit, tool
+
+class MyCustomToolkit(Toolkit):
+    @tool
+    def my_custom_action(self, param: str) -> str:
+        """Description of what this tool does"""
+        # Your implementation here
+        return result
+```
+
+We're building a registry of community toolkits, and we encourage you to share your creations.
+
+## Safety and Responsible Use
+
+We take AI safety seriously. goose includes several safety features:
+
+- **Confirmation prompts** for potentially dangerous operations
+- **Sandboxing options** to limit what goose can access
+- **Audit logging** of all actions taken
+- **Rate limiting** to prevent runaway processes
+
+We're also developing guidelines for responsible agent development and use.
+
+## Open Source and Community
+
+goose is fully open source under the Apache 2.0 license. We believe AI agents should be:
+
+- **Transparent** - You should understand what they're doing
+- **Controllable** - You should be able to modify their behavior
+- **Auditable** - You should be able to verify their safety
+- **Community-driven** - Development should be guided by user needs
+
+## Roadmap
+
+We have exciting plans for goose:
+
+### Short Term (Q1 2025)
+
+- Additional toolkit integrations
+- Improved context management
+- Better error handling and recovery
+- Enhanced documentation
+
+### Medium Term (Q2-Q3 2025)
+
+- Multi-agent collaboration
+- Visual interface options
+- Mobile support
+- Enterprise features
+
+### Long Term (Q4 2025 and beyond)
+
+- Advanced reasoning capabilities
+- Proactive assistance
+- Learning from user feedback
+- Ecosystem of specialized agents
+
+## Join the Community
+
+We're building goose in the open and we'd love your help:
+
+- **Try goose** and share your feedback
+- **Contribute code** to the core framework or toolkits
+- **Report issues** and suggest improvements
+- **Share your use cases** and help others learn
+- **Build toolkits** for your favorite tools
+
+Visit [github.com/block/goose](https://github.com/block/goose) to get started.
+
+Join our [Discord community](https://discord.gg/block-opensource) to connect with other goose users and contributors.
+
+## The Future of AI Agents
+
+We believe AI agents represent a fundamental shift in how we interact with computers. Instead of learning complex interfaces and command-line syntax, we can simply describe what we want to accomplish.
+
+But this future only works if AI agents are:
+
+- **Trustworthy** - Transparent and accountable
+- **Controllable** - Respectful of user agency
+- **Accessible** - Available to everyone, not just large organizations
+
+By building goose as open source, we're working toward that future.
+
+## Get Started Today
+
+Ready to try goose? Here's how:
+
+1. Install: `pip install goose-ai`
+2. Configure: `goose configure`
+3. Start: `goose session start`
+4. Ask: "What can you help me with?"
+
+Welcome to the future of development. Let's build it together.
+
+---
+
+*Questions or feedback? Email us at goose@block.xyz or join our [Discord](https://discord.gg/block-opensource)*
