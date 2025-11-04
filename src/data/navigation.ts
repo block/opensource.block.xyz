@@ -7,8 +7,7 @@ export const mainNavigation: NavGroup[] = [
     items: [
       {
         title: "Blog",
-        href: "/blog",
-        iconName: "newspaper"
+        href: "/blog"
       },
     ],
   }
