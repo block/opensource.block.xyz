@@ -76,7 +76,7 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 3rem);
+  padding-inline: clamp(0.5rem, 2vw, 3rem);
 
   @media (width >= --theme(--breakpoint-sm)) {
     max-width: none;
@@ -200,8 +200,8 @@
 
   /* Typography - Block Content Styles */
   h1 {
-    @apply font-sans text-4xl font-medium leading-18;
-    @apply mt-8 mb-6 scroll-m-20 tracking-tight;
+    @apply font-sans text-3xl md:text-4xl font-medium leading-18;
+    @apply mt-4 mb-3 md:mt-8 md:mb-6 scroll-m-20 tracking-tight;
   }
 
   h2 {
