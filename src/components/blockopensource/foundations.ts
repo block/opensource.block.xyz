@@ -23,7 +23,7 @@ export const foundations: Brand[] = [
   },
   {
     name: "Thanks.Dev",
-    href: "https://thanks.dev/home",
+    href: "https://thanks.dev/r/block",
     iconName: "block-open-source/thanks-dev",
   },
 ];
