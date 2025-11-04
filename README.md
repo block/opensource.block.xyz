@@ -1,42 +1,84 @@
-# Astro Shadcn UI Template
+# Block Open Source
 
-This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI.
+This repository contains the source code for [opensource.block.xyz](https://opensource.block.xyz), the open source home of Block, Inc. (NYSE: XYZ).
 
-## Getting Started
+At Block, we Default to Open. We believe that open source and open protocols are essential to our purpose of Economic Empowerment.
 
-To get started with this application, make sure you have Node.js v18+ installed on your system. Then, follow these steps:
+Block is a global technology company that builds tools to empower businesses and individuals to participate in the economy. Our open source initiatives span across payments, blockchain, security, and developer tools, reflecting our commitment to building in the open and contributing to the broader technology community.
+
+## About This Site
+
+This site serves as the central hub for Block's open source projects and efforts, featuring:
+
+- **Project Showcase**: Discover our open source projects and contributions
+- **Blog**: Technical articles, announcements, and insights from Block engineers
+- **Resources**: Documentation and guides for working with Block's open source projects
+
+## Build Instructions
+
+This site is built with [Astro](https://astro.build), a modern static site framework. It is forked from the Block Open Source [Docs Site Kickstarter](https://github.com/block/docs-site-kickstarter).
+
+### Prerequisites
+
+- Node.js v18 or higher (Tested w/ `24`)
+- [pnpm](https://pnpm.io) package manager
+
+### Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/block/opensource.block.xyz.git
+   cd opensource.block.xyz
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Start the development server:
+   ```bash
+   pnpm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:4321`
+
+### Production Build
+
+To create a production build:
 
 ```bash
-git clone --depth=1 https://github.com/AREA44/astro-shadcn-ui-template
-cd astro-shadcn-ui-template
-pnpm install
-pnpm dev
+pnpm run build
 ```
 
-Now, you can open your browser and navigate to http://localhost:4321 to see the application running.
+The built site will be output to the `dist/` directory.
 
-## Features
+To preview the production build locally:
 
-- [Astro](https://astro.build): A modern static site builder that allows you to write components using familiar web standards like HTML, CSS, and JavaScript.
-- [Tailwind CSS](https://tailwindcss.com): A utility-first CSS framework that provides a set of pre-designed styling classes to rapidly build user interfaces.
-- [shadcn/ui](https://ui.shadcn.com): A collection of reusable UI components for building responsive and accessible interfaces.
-- The template includes support for a theme toggle, allowing users to switch between light and dark themes.
+```bash
+pnpm run preview
+```
 
-## How to add components
+## Deployment
 
-Shadcn UI is a collection of re-usable components that can be easily integrated into your applications. It is not a component library, but rather a set of components that you can copy and paste into your projects.
+This site is automatically deployed to production using GitHub Actions.
 
-To add a new component to your application, please refer to the [configuration guide](https://ui.shadcn.com/docs/installation/astro#thats-it).
+- **Production Branch**: `production`
+- **Live Site**: [opensource.block.xyz](https://opensource.block.xyz)
 
-> [!NOTE]
-> In Astro, an [island](https://docs.astro.build/en/concepts/islands/) refers to any interactive UI component on the page. To add an interactive component like [Accordion](https://ui.shadcn.com/docs/components/accordion), [Dialog](https://ui.shadcn.com/docs/components/dialog) and more you have a couple of solutions available: [Add a Shadcn UI Component - Space Madness](https://spacemadness.dev/docs/add-a-shadcn-ui-component) or [shadcn-ui/ui#2890](https://github.com/AREA44/astro-shadcn-ui-template/issues/66).
+When changes are pushed to the `production` branch, a GitHub Action workflow automatically builds and deploys the site to the live environment.
 
-For detailed documentation on using Shadcn UI, please visit the [full documentation](https://ui.shadcn.com/docs).
+### Deployment Workflow
 
-Shadcn UI is primarily built for the React framework. If you are unfamiliar with framework components in Astro, we recommend reading the [framework components guide](https://docs.astro.build/en/core-concepts/framework-components/) to get started.
+1. Make changes on a feature branch
+2. Create a pull request to the `production` branch
+3. After review and merge, the GitHub Action triggers automatically
+4. The site is built and deployed to opensource.block.xyz
 
-Feel free to explore the various components and enhance your application with Shadcn UI!
+## Contributing
+
+We welcome contributions! Please see our contributing guidelines for more information.
 
 ## License
 
-Licensed under the [MIT License](LICENSE).
+Licensed under the [Apache 2.0 License](LICENSE).
