@@ -20,28 +20,20 @@ const description = "At Block, we believe open source is at the heart of innovat
   showBreadcrumbs={false}
   showTitleAsH1={false}
 >
+  <h1>{title}</h1>
+  <h3 class=" max-w-250">{description}</h3>
 
-  <CTASection
-    title={title}
-    tagline={tagline}
-    description={description}
-    layout="minimal"
-    taglineIconName="block-open-source/block"
-  >
-    <div class="text-lg">
-
-        By collaborating in the open, we create higher quality software, hardware, 
-        and protocols through relentless collective examination, and also ensure our systems, 
-        hardware, and protocols evolve to meet real-world needs.
-    </div>
-    <div class="text-lg">
-      We are committed to building solutions that serve our customers, while enriching the 
-      broader developer community with open, accessible tools. Our open source strategy 
-      emphasizes transparency, collaboration, and shared progress—because building together 
-      empowers everyone.
-
-  </div>
-  </CTASection>
+  <p class="text-lg max-w-250">
+      By collaborating in the open, we create higher quality software, hardware, 
+      and protocols through relentless collective examination, and also ensure our systems, 
+      hardware, and protocols evolve to meet real-world needs.
+  </p>
+  <p class="text-lg max-w-250">
+    We are committed to building solutions that serve our customers, while enriching the 
+    broader developer community with open, accessible tools. Our open source strategy 
+    emphasizes transparency, collaboration, and shared progress—because building together 
+    empowers everyone.
+  </p>
 
   <FeaturedProjects />
 

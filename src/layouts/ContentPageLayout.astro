@@ -39,7 +39,7 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="relative min-h-[calc(100vh-4rem)]">
+  <div class="relative mx-16 min-h-[calc(100vh-4rem)]">
 
     <!-- Navbar -->
     <div class={`
@@ -62,14 +62,14 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
     `}>
       {Astro.slots.has('navbar') && (
         <nav class="relative border-r border-slate-200 dark:border-slate-700 bg-background/80 backdrop-blur-sm hidden lg:block">
-          <div class="sticky top-16 h-[calc(100vh-64px)] overflow-y-auto py-6 px-6 scrollbar-thin scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-500 scrollbar-track-transparent">
+          <div class="sticky top-16 h-[calc(100vh-64px)] overflow-y-auto py-6 px-8 scrollbar-thin scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-500 scrollbar-track-transparent">
             <slot name="navbar" />
           </div>
         </nav>
       )}
 
-      <main class="container min-w-0 py-0 md:py-8 px-4 md:px-25">
-        <div id="mainContent" class="prose prose-slate dark:prose-invert mx-auto" style="max-width: min(100%, 150ch);">
+      <main class="container min-w-0 py-0 px-8">
+        <div id="mainContent" class="prose prose-slate dark:prose-invert">
           
           {/** Breadcrumbs */}
           {showBreadcrumbs && (
@@ -107,16 +107,3 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
     </div>
   </div>
 </BaseLayout>
-
-<script>
-  document.querySelectorAll('.animate-on-scroll').forEach(el => el.classList.add('visible'));
-</script>
-
-<style>
-  /* Background block pattern using our custom SVG */
-  .bg-block-pattern {
-    background-image: url('/src/icons/block-background.svg');
-    background-repeat: repeat;
-    background-size: 50px 50px;
-  }
-</style>
