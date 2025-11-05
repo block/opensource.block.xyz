@@ -1,7 +1,6 @@
 ---
 
 import Icon from '@/components/block/Icon.astro';
-import ContentSection from '@/components/block/ContentSection.astro';
 import GitHubStats from '@/components/block/GitHubStats.astro';
 import Button from '@/components/ui/Button.astro';
 import { featuredProjects } from './featured-projects';
@@ -69,41 +68,3 @@ export interface Project {
 ))}
 
 </div>
-
-{/*
-<section>
-  <h2>Explore Our Projects</h2>
-  <p>
-    Block has a variety of open source projects across our brands. From payment systems 
-    to privacy initiatives, from cloud infrastructure to bitcoin hardware wallets, from AI 
-    agent frameworks to music streaming, our projects span diverse fields, and each one is 
-    open for contributions and collaboration. Visit our GitHub organizations and project pages 
-    to learn more.
-  </p>
-  <div id="projects" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8 py-6 md:py-8">
-    {featuredProjects.map((project) => (
-      <a 
-        href={project.href} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="group flex flex-col items-center text-center p-3 sm:p-4 md:p-6 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 no-underline"
-      >
-        <div class="mb-2 sm:mb-3 md:mb-4 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 flex items-center justify-center">
-          <Icon 
-            name={project.iconName} 
-            class="w-full h-full text-black dark:text-white transition-transform duration-200 group-hover:scale-110"
-          />
-        </div>
-        <span class="text-sm sm:text-base md:text-lg font-medium leading-tight">
-          {project.name}
-        </span>
-      </a>
-    ))}
-  </div>
-  <p>
-    Whether you're interested in financial services, cryptography, blockchain, 
-    AI, or developer tools, there's a project for you to get involved in.
-  </p>
-</section>
-
- */}

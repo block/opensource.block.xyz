@@ -11,17 +11,16 @@ const currentYear = new Date().getFullYear();
 const copyrightText = footerBlockOSData.copyright || `© ${currentYear} ${footerBlockOSData.companyName}. All rights reserved.`;
 ---
 
-<footer class="bg-background border-t border-border mt-auto py-16 md:py-12 sm:py-8 pb-8 md:pb-6 sm:pb-6">
-  <div class="container mx-4 sm:mx-6 md:mx-2 lg:mx-auto" style="max-width: min(100%, 100ch);">
+<footer class="bg-background border-t border-border mx-8 py-8">
+  <div class="container mx-0 px-0">
     <div class="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-0 mb-12 md:mb-8">
       <!-- Block Logo and Name - Left Side -->
-      <div class="flex-shrink-0 lg:pl-0">
+      <div class="flex-shrink-0 m-0 p-0">
         {footerBlockOSData.logo && (
           <div class="flex items-center gap-2.5">
             <div class="w-24 h-24">
               <Icon name={footerBlockOSData.logo}/>
             </div>
-            <div class="text-xl font-semibold text-foreground">{footerBlockOSData.companyName}</div>
           </div>
         )}
       </div>
@@ -59,7 +58,6 @@ const copyrightText = footerBlockOSData.copyright || `© ${currentYear} ${footer
     
     <!-- Footer Bottom -->
     <div class="mt-8">
-      <div class="h-px bg-border mb-8"></div>
       <div class="flex justify-between items-center gap-4 md:flex-col md:text-center md:gap-6">
         <div class="text-sm text-muted-foreground">
           {copyrightText}
