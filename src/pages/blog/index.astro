@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import BlogSection from "@/components/blog/BlogSection.astro"
 import { getCollection } from "astro:content";
 
@@ -16,7 +16,9 @@ const postCategories = [...new Set(posts.flatMap(post => post.data.tags || []))]
 allCategories.push(...postCategories.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1)));
 ---
 
-<BaseLayout title={title} description="Thoughts from the project team">
+<ContentPageLayout title={title}
+  showBreadcrumbs={false}
+  showTitleAsH1={false}>
 
   <BlogSection
     title={title}
@@ -31,4 +33,5 @@ allCategories.push(...postCategories.map(cat => cat.charAt(0).toUpperCase() + ca
     categories={allCategories}
     activeCategory="All"
   />
-</BaseLayout>
+
+</ContentPageLayout>

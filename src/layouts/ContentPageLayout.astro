@@ -39,7 +39,7 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="relative mx-8 px-0 min-h-[calc(100vh-4rem)]">
+  <div class="relative mx-18 px-0 min-h-[calc(100vh-4rem)]">
 
     <div class={`
       relative min-h-[calc(100vh-64px)] max-w-[2400px]
@@ -63,12 +63,12 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
         </nav>
       )}
 
-      <main class="container min-w-0 py-0 px-0">
+      <main class="container min-w-0 py-8 px-0">
         <div id="mainContent" class="prose prose-slate dark:prose-invert">
           
           {/** Breadcrumbs */}
           {showBreadcrumbs && (
-            <div class="mb-6 mt-2">
+            <div class="mb-8 mt-0">
               <Breadcrumbs 
                 indexText="Home"
                 mainBemClass="c-breadcrumbs"
@@ -94,7 +94,7 @@ const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = tr
 
       {headings && headings.length > 0 && (
         <aside class="relative bg-background/80 backdrop-blur-sm hidden xl:block">
-          <div class="sticky top-32 h-fit py-6 px-6">
+          <div class="sticky top-32 h-fit mb-16 py-6 px-6">
             <TableOfContents headings={headings} />
           </div>
         </aside>

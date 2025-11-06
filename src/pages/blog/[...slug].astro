@@ -7,7 +7,6 @@ import AuthorCard from '@/components/blog/AuthorCard.astro';
 import MDXComponents from '@/components/mdx/MDXComponents';
 import "@/styles/breadcrumbs.css";
 import { Image } from "astro:assets";
-import { getUrlRelativeToBase } from "@/lib/utils";
 
 /**
  * Magic required function for dynamic routes; deteremines the slug
@@ -61,7 +60,7 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
   maxWidth="wide"
 	showTitleAsH1={false}>
 
-	<div class="flex flex-col lg:flex-row mb-2 border rounded-md bg-muted overflow-hidden">
+	<div class="flex flex-col lg:flex-row mt-8 mb-8 border rounded-md bg-muted overflow-hidden">
 		
 		<div class="flex-1 ml-6 lg:ml-6 ml-0 p-4 lg:p-6">
 			<h1 class="pb-0 mb-0 text-muted-background leading-tight">{title}</h1>
@@ -82,5 +81,7 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
 		</div>
 		)}
 	</div>
-  <Content components={MDXComponents} />
+  <div class="mb-16">
+	  <Content components={MDXComponents} />
+	</div>
 </ContentPageLayout>
