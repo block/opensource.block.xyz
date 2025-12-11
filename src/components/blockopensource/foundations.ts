@@ -2,6 +2,11 @@ import type { Brand } from "@/components/block/BrandWall.astro";
 
 export const foundations: Brand[] = [
   {
+    name: "Agentic AI Foundation",
+    href: "https://aaif.io/",
+    iconName: "block-open-source/aaif",
+  },
+  {
     name: "The Linux Foundation",
     href: "https://www.linuxfoundation.org/",
     iconName: "block-open-source/linux-foundation",
