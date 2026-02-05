@@ -1,0 +1,104 @@
+---
+title: "Agentic Commerce & BNPL: Integrating Afterpay with the Universal Commerce Protocol (UCP)"
+author: vasilii 
+date: "2026-02-05"
+slug: "agentic-commerce-afterpay-ucp"
+excerpt: "How we're leveraging open protocols to bring shopping and purchasing right inside your AI agent"
+image: "ucp.png"
+tags: ["agentic-commerce", "ucp", "afterpay", "goose"]
+readTime: "7 minutes"
+---
+
+import { Image } from 'astro:assets';
+import imageAfterpayPaymentAuthorized from '/src/assets/blog/afterpay-payment-authorized.png';
+
+Imagine asking your AI assistant to help replace your worn-out running shoes. It pulls your recent mileage from 
+Strava, checks your race schedule, and surfaces options matched to your stride and budget, all in the chat. 
+One confirmation, done. This is agentic commerce: products discovered in context, purchases completed without app-hopping. 
+What makes it work is open protocols: common languages that connect your apps, your favorite stores, and your payment 
+options into one seamless experience.
+
+The momentum is real. More consumers are discovering and researching products inside AI assistants, and Google, OpenAI, 
+and others are already building toward a future where AI agents handle discovery, evaluation, and transactions. The 
+Universal Commerce Protocol (UCP) is an open standard that gives these agents a shared language to interact with sellers 
+and payment providers.
+
+Recently, we explored the technical feasibility of bringing Buy Now, Pay Later (BNPL) into this ecosystem by 
+integrating Afterpay into [goose](https://block.github.io/goose/) (an open source AI agent) over the UCP protocol. 
+By enabling installment scheduling and real-time underwriting, BNPL provides customers with immediate financial 
+flexibility and convenient money management right within the agentic flow. Enabling BNPL within agentic flow, 
+however, introduces unique technical requirements for identity, underwriting, and user experience that are not 
+present in standard card transactions today.
+
+## What is UCP?
+
+[UCP](https://ucp.dev) is an open protocol developed by Google that bridges three main entities: 
+Agents (like goose, Gemini, ChatGPT, Claude, or specialized agents), Sellers (merchants), and Payment 
+Providers. It allows an agent to:
+
+* discover a seller and, in the future, their product catalog via a `/.well-known/ucp` endpoint,  
+* understand which payment methods the seller supports, and  
+* execute a complete purchase end-to-end within a single chat interface.
+
+## What is Afterpay?
+
+Afterpay is a leading BNPL provider that allows consumers to receive products immediately while 
+splitting total cost into multiple weekly or monthly installments. Afterpay provides a flexible alternative 
+to credit cards and traditional credit by offering instant eligibility decisions through real-time underwriting. 
+For sellers, the service functions like a standard payment method with immediate settlement, while for customers, 
+it serves as a transparent and convenient money management tool.
+
+## The Technical Challenge: BNPL vs. Card Payments
+
+Integrating BNPL into UCP presents different architectural challenges compared to standard credit or debit cards:
+
+1. **Identity and Underwriting**. Unlike a credit card, which can be stored as a static token, BNPL requires real-time underwriting. This means the payment provider (Afterpay) must identify the user and assess risk before authorizing a transaction. While different from the card acceptance flow, the UCP standard is flexible enough to enable BNPL flow through payment handlers and existing APIs.  
+2. **Contextual Data**. For effective underwriting, BNPL providers need granular details about the seller and the specific purchase. UCP's structured checkout sessions, which include detailed line items, provide the necessary context for Afterpay to make informed credit decisions.  
+3. **Payment Plan Transparency**. Traditional payments focus on a single total price. In contrast, BNPL must communicate a multi-step payment schedule (e.g., "*25% today and three more payments every two weeks*") to the agent so it can be surfaced to the user.
+
+<Image src={imageAfterpayPaymentAuthorized} alt="Afterpay payment authorized in UCP"/>
+
+## The Integration Flow
+
+The technical implementation follows a three-phase process to ensure security and to prevent replay attacks:
+
+* **Phase 1: Initiating checkout**. The Agent initiates a checkout session with the Seller, declaring the specific line items negotiating supported payment handlers. The Seller's backend generates a unique checkout identifier, establishing the transaction context required for the subsequent underwriting process.  
+* **Phase 2: Underwriting**. The Agent calls the BNPL API, providing a unique checkout identifier from the seller session. Afterpay evaluates the transaction context and, if approved, returns an opaque payment token to the agent. Importantly, eligibility determinations, payment terms, and required consumer disclosures continue to be handled by Afterpay as part of the checkout flow, in accordance with applicable laws.  
+* **Phase 3: Capture**. Once the user confirms the order, the agent passes the token to the Seller. The seller's backend then communicates directly with Afterpay to capture the funds and finalize the debt creation.
+
+## Visualizing Payment Plans with MCP Apps
+
+While UCP provides the essential data layer for commerce, the user experience in agentic environments can be 
+significantly enhanced through [MCP Apps](https://modelcontextprotocol.io/docs/extensions/apps). MCP Apps allow agents 
+to move beyond text-based responses by rendering rich, interactive visual elements directly within the chat interface.
+
+<br />
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dfUVyYjjRbs?si=ChoHX2R8Yz5aSfos" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+For BNPL services like Afterpay, this visual layer is transformative for several reasons:
+
+* **Payment Plan Visualization**. Instead of an agent describing a payment schedule in text, an MCP App can render a clear, visual timeline of installments. This at-a-glance transparency allows users to easily understand exactly when payments occur and in what amounts.  
+* **Trust and Consistency**. By using standardized visual components, payment providers can maintain brand recognition and provide professional, high-fidelity disclosures. This visual consistency is critical for building user trust during real-time underwriting and credit decisions.  
+* **Interactive Interaction**. MCP Apps can support dynamic interactions, such as adjusting payment methods or viewing detailed terms, without requiring the agent to generate new text for every small change.
+
+Ultimately, combining the structured data exchange of UCP with the visual capabilities of MCP creates a more sophisticated 
+agentic flow. It turns complex financial processes into intuitive experiences, ensuring that users are fully informed and 
+confident before they authorize a transaction.
+
+## Key Takeaways
+
+* **UCP as a Bridge**. The Universal Commerce Protocol acts as the standardized language connecting AI agents, sellers, and payment providers for seamless transactions.  
+* **Dynamic vs. Static Payments**. Unlike credit cards, BNPL requires real-time underwriting and detailed purchase context (line items, seller information) to assess risk effectively.  
+* **Secure Three-Phase Execution**. Integration follows a secure process. Checkout initiation, followed by underwriting and then capture.  
+* **The Power of Visualization**. Leveraging MCP Apps allows agents to render visual payment schedules, transforming complex financial data into intuitive user experiences.  
+* **Discovery-First Financing**. The real value of BNPL in agentic commerce happens during discovery. Surfacing payment plans early, rather than waiting until the final step, allows users to make informed purchasing decisions from the very first interaction.
+
+## Conclusion
+
+This integration shows that open protocols can handle the complexity of BNPL, from real-time underwriting 
+to identity verification. But the real opportunity is upstream. Increasingly, people are discovering and researching 
+products inside AI assistants, not just completing transactions. Open protocols ensure sellers can meet customers 
+where they are: surfacing products in conversation, connecting to the tools people already use, and making checkout frictionless. 
+
+To learn more about UCP protocol, and to start experimenting and contributing head to [https://ucp.dev](https://ucp.dev). Happy hacking!

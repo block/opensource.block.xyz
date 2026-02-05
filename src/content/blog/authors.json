@@ -19,5 +19,12 @@
       "social-github": "block",
       "social-x": "blockopensource",
       "avatar" : "block-logo.png"
+    },
+    "vasilii" : {
+      "name": "Vasilii Trofimchuk",
+      "title": "Agentic Commerce Engineering Lead, Block",
+      "social-github": "vthub",
+      "social-linkedin": "in/trofimchuk",
+      "avatar" : "vasilii.png"
     }
 }
