@@ -251,7 +251,6 @@
     font-weight: var(--font-weight-normal, 400);
     line-height: var(--text-base-line-height, 24px); /* 150% */
     display: flex;
-    width: 323px;
     padding: 0px 0px var(--spacing-6, 24px) var(--spacing-6, 24px);
     flex-direction: column;
     align-items: flex-start;
@@ -268,7 +267,6 @@
     font-weight: var(--font-weight-normal, 400);
     line-height: var(--text-base-line-height, 24px); /* 150% */
     display: flex;
-    width: 323px;
     padding: 0px 0px var(--spacing-6, 24px) var(--spacing-6, 24px);
     flex-direction: column;
     align-items: flex-start;
