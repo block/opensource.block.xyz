@@ -52,13 +52,25 @@ console.log(imagePath);
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/blog/*.{jpeg,jpg,png,gif}') // Must take a String literal otherwise we'd reuse imageDir here
 if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
 
+// Handle custom OG image for social media
+const ogImageFilename = post.data.ogImage;
+let ogImageUrl;
+if (ogImageFilename) {
+  const ogImagePath = imageDir + ogImageFilename;
+  if (images[ogImagePath]) {
+    const processedOgImage = images[ogImagePath]();
+    ogImageUrl = new URL(processedOgImage.src, Astro.site);
+  }
+}
+
 ---
 
 <ContentPageLayout title={title} 
   description={description} 
   headings={headings} 
   maxWidth="wide"
-	showTitleAsH1={false}>
+	showTitleAsH1={false}
+  ogImage={ogImageUrl}>
 
 	<div class="flex flex-col lg:flex-row mt-8 mb-8 border rounded-md bg-muted overflow-hidden">
 		
