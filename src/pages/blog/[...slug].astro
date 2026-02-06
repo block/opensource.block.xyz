@@ -55,11 +55,12 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
 // Handle custom OG image for social media
 const ogImageFilename = post.data.ogImage;
 let ogImageUrl;
+let ogImageMetadata;
 if (ogImageFilename) {
   const ogImagePath = imageDir + ogImageFilename;
   if (images[ogImagePath]) {
-    const processedOgImage = images[ogImagePath]();
-    ogImageUrl = new URL(processedOgImage.src, Astro.site);
+    ogImageMetadata = images[ogImagePath]();
+    ogImageUrl = new URL(ogImageMetadata.src, Astro.site);
   }
 }
 
@@ -72,6 +73,17 @@ if (ogImageFilename) {
 	showTitleAsH1={false}
   ogImage={ogImageUrl}>
 
+	{/* Show full-width header if custom OG image is provided */}
+	{ogImageMetadata && (
+		<div class="w-full mb-8 -mt-8">
+			<Image 
+				src={ogImageMetadata}
+				alt={post.data.title}
+				class="w-full h-auto rounded-lg"
+			/>
+		</div>
+	)}
+
 	<div class="flex flex-col lg:flex-row mt-8 mb-8 border rounded-md bg-muted overflow-hidden">
 		
 		<div class="flex-1 ml-6 lg:ml-6 ml-0 p-4 lg:p-6">
@@ -81,7 +93,8 @@ if (ogImageFilename) {
 			</p>
       <AuthorCard author={author}/>
 	  </div>
-		{post.data.image && (
+		{/* Only show sidebar image if no custom OG image */}
+		{post.data.image && !ogImageMetadata && (
 		<div class="flex-none order-last lg:order-none lg:max-w-xs lg:self-stretch">
 			<Image 
 				src={images[imagePath]()}
