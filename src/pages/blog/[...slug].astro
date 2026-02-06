@@ -52,13 +52,37 @@ console.log(imagePath);
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/blog/*.{jpeg,jpg,png,gif}') // Must take a String literal otherwise we'd reuse imageDir here
 if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
 
+// Handle custom OG image for social media
+const ogImageFilename = post.data.ogImage;
+let ogImageUrl;
+let ogImageMetadata;
+if (ogImageFilename) {
+  const ogImagePath = imageDir + ogImageFilename;
+  if (images[ogImagePath]) {
+    ogImageMetadata = images[ogImagePath]();
+    ogImageUrl = new URL(ogImageMetadata.src, Astro.site);
+  }
+}
+
 ---
 
 <ContentPageLayout title={title} 
   description={description} 
   headings={headings} 
   maxWidth="wide"
-	showTitleAsH1={false}>
+	showTitleAsH1={false}
+  ogImage={ogImageUrl}>
+
+	{/* Show full-width header if custom OG image is provided */}
+	{ogImageMetadata && (
+		<div class="w-full mb-8 -mt-8">
+			<Image 
+				src={ogImageMetadata}
+				alt={post.data.title}
+				class="w-full h-auto rounded-lg"
+			/>
+		</div>
+	)}
 
 	<div class="flex flex-col lg:flex-row mt-8 mb-8 border rounded-md bg-muted overflow-hidden">
 		
@@ -69,7 +93,8 @@ if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist`);
 			</p>
       <AuthorCard author={author}/>
 	  </div>
-		{post.data.image && (
+		{/* Only show sidebar image if no custom OG image */}
+		{post.data.image && !ogImageMetadata && (
 		<div class="flex-none order-last lg:order-none lg:max-w-xs lg:self-stretch">
 			<Image 
 				src={images[imagePath]()}
