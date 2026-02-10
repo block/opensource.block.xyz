@@ -12,6 +12,7 @@ export const collections = {
       slug: z.string(),
       excerpt: z.string().optional(),
       image: z.string().optional(),
+      ogImage: z.string().optional(), // Custom OG image for social media (1200x630)
       tags: z.array(z.string()).optional(),
       readTime: z.string().optional(),
     })}),
