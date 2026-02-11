@@ -6,7 +6,7 @@ import { formatDate } from '@/components/blog/blogUtils';
 import AuthorCard from '@/components/blog/AuthorCard.astro';
 import MDXComponents from '@/components/mdx/MDXComponents';
 import "@/styles/breadcrumbs.css";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 
 /**
  * Magic required function for dynamic routes; deteremines the slug
@@ -59,8 +59,10 @@ let ogImageMetadata;
 if (ogImageFilename) {
   const ogImagePath = imageDir + ogImageFilename;
   if (images[ogImagePath]) {
-    ogImageMetadata = images[ogImagePath]();
-    ogImageUrl = new URL(ogImageMetadata.src, Astro.site);
+    ogImageMetadata = await images[ogImagePath]();
+    // Use getImage to get the processed public URL for og:image
+    const processedOgImage = await getImage({ src: ogImageMetadata.default });
+    ogImageUrl = new URL(processedOgImage.src, Astro.site);
   }
 }
 
@@ -81,7 +83,7 @@ if (ogImageFilename) {
 			{ogImageMetadata && (
 				<div class="w-full mb-8 -mt-8">
 					<Image 
-						src={ogImageMetadata}
+						src={ogImageMetadata.default}
 						alt={post.data.title}
 						class="w-full h-auto rounded-lg"
 					/>

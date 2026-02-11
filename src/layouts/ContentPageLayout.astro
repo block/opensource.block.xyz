@@ -33,12 +33,13 @@ interface Props {
   headings?: MarkdownHeading[];
   showTitleAsH1?: boolean;
   showBreadcrumbs?: boolean;
+  ogImage?: URL | undefined;
 }
 
-const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = true } = Astro.props;
+const { title, description, headings, showTitleAsH1 = true, showBreadcrumbs = true, ogImage} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} ogImage={ogImage}>
   <div class="relative mx-18 px-0 min-h-[calc(100vh-4rem)]">
 
     <div class={`
