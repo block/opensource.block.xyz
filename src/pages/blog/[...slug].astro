@@ -61,7 +61,8 @@ if (ogImageFilename) {
   if (images[ogImagePath]) {
     ogImageMetadata = await images[ogImagePath]();
     // Use getImage to get the processed public URL for og:image
-    const processedOgImage = await getImage({ src: ogImageMetadata.default });
+    // Use PNG format for Twitter compatibility (Twitter doesn't support WebP)
+    const processedOgImage = await getImage({ src: ogImageMetadata.default, format: 'png' });
     ogImageUrl = new URL(processedOgImage.src, Astro.site);
   }
 }
