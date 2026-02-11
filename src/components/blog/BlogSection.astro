@@ -18,6 +18,7 @@ interface BlogPost {
     date: string;
     excerpt: string;
     image?: string;
+    ogImage?: string;
     tags?: string[];
     readTime?: string;
   }
@@ -99,7 +100,7 @@ const getAuthorName = (authorId: string) => {
             layout === 'list' ? 'flex-row items-center md:flex-col' :
             layout === 'featured' && index === 0 ? 'col-span-full flex-row items-center p-8 md:flex-col md:p-6' : ''
           }`}>
-            {post.data.image && (
+            {(post.data.ogImage || post.data.image) && (
               <div class={`relative overflow-hidden ${
                 layout === 'grid' || (layout === 'featured' && index !== 0) ? 'aspect-video' :
                 layout === 'list' || (layout === 'featured' && index === 0) ? 'w-80 h-48 flex-shrink-0 md:w-full md:h-48' :
@@ -107,7 +108,7 @@ const getAuthorName = (authorId: string) => {
               }`}>
                 <a href={getPostURL(post)}>
                   <Image 
-                    src={images[imagePath + post.data.image]()}
+                    src={images[imagePath + (post.data.ogImage || post.data.image)]()}
                     alt={post.data.title}
                     width={800}
                     height={600}

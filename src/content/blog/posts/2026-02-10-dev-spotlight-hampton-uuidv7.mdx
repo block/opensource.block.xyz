@@ -1,0 +1,136 @@
+---
+title: "Developer Spotlight: Hampton Lintorn-Catlin on UUIDv7"
+author: alrubinger
+date: "2026-02-11"
+slug: "dev-spotlight-hampton-uuidv7"
+excerpt: "We discuss the purpose behind building for real people, his approach to embracing agents and new thinking, and how he's building a better ID system for Square as an open source project implementing the UUID v7 standard."
+image: "hampton.jpg"
+ogImage: "hampton-og.png"
+tags: ["dev-spotlight", "uuid"]
+readTime: "7 minutes"
+---
+
+## Our Guest
+
+Today we sit down with Hampton Lintorn-Catlin, a seasoned open source veteran and Principal Software Engineer on the 
+Square Orders Platform. We discuss the purpose behind building for real people, his approach to embracing agents and new thinking, and 
+how he's building a better ID system for Square as an open source project implementing the [UUID v7 standard](https://datatracker.ietf.org/doc/rfc9562/). 
+
+## The Talk
+
+### Hampton, awesome to have you today. You've had lots of wins in open source over the years. I'd like to know: how did you come to work at Block, and what's important to you in our work here?
+
+Thanks - great to be here! I've been programming for 30 years, something like that. 20 of them professionally. I'm mostly a 
+Rubyist. That's the one I've used the most in my career, along with tons of JavaScript. Here I mostly write Java and Kotlin. But also 
+Swift. I wrote a ton of Objective-C. In my past, I've worked at [Wikimedia Foundation](https://wikimediafoundation.org/), built all their 
+mobile applications back when that was like a very new thing and sort of a greenfield area, figuring out early mobile design. And then I'm 
+definitely best known as the inventor of [Sass](https://sass-lang.com/), which is an extremely popular CSS preprocessor language. 
+
+I ended up at Block partly because my husband has actually worked here for the last four and half years. And so I kind of already knew what 
+I was getting into. And I knew about the company culture and I knew Jack's vision for the future and enabling sellers. And I really loved the vision and it felt like 
+it was great to find an actual tech company that aligned with my personal values and things that I was really interested in. I love the real world 
+impacts of the software I build. 
+
+My buddy Sam who runs a bar on the corner. I go there and they're using the actual software and you know, 
+I get to ask them how it's going. And it's really cool to have that connection of this extremely digital 
+world all the way to real impacts that people actually care about in my real life.
+
+### YES. All this tech is to help real people. And you've had a huge career so far building in public. What guidance do you have for folks who might be looking to contribute early on to open source or get involved in developer tools?
+
+Yeah, there's a couple of things. I would say there's a lot of great news sources out there. I'm always surprised at how new developers 
+sometimes aren't as aware. There's a website called [Lobsters](https://lobste.rs/) that I recommend. There's the old [Slashdot](https://slashdot.org/) 
+still around with good information. [Hacker News](https://news.ycombinator.com/), that's the other one.
+
+Like these places always have new projects being posted and conversations around new technologies. And that's generally where I'm 
+finding out things. It's just in conversation with people who are outside of Block and just sort of getting new ideas and bringing 
+them together. And I think the second thing is to solve your own problem. So as you're using a tool, if something doesn't work the 
+way you would like it to work, know that with code, especially open source code, you can just go look at how it works 
+and change it.
+
+And I think this is even more true with AI tools. It's even easier to quickly become an expert in the way something works 
+using agent coding.
+
+### Given that you've been adopting agentic flows and being able to have a discussion with your machine and have it work for you - would you share some of the wins that you've had using agentic development and some of the techniques that you've employed?
+
+I just tell people: look at the tools now, listen to conflicting advice. Tools are gonna change, but each and every time you're just gonna learn a 
+little bit more and have a little bit more knowledge. So lean into the ride on that stuff.
+
+It's wild and it's probably not going to calm down for quite a while. In my particular setup, I have found that to deliver truly high quality 
+results from agentic coding still requires, and I think will actually always require, a lot of human thoughtfulness and wisdom. Agentic coders 
+are amazing at writing code. They're amazing at following what's been outlined for them. They're amazing at researching.
+
+But they're not really good at having a great sense of what the real problem is or trying to really understand how other agents are even 
+interacting with the system. And then you ask your question about what my flow is. For me, I'm mostly running single agents on my 
+computer and I'm generally in constant conversation with it.
+
+And I spend a lot of time thinking through the engineering applications and giving it a design. So to build this UUID v7 library, I just started with a set of principles that I knew I wanted in a library. It didn't matter the language. I knew I wanted the compacted form. 
+I knew that I wanted certain types of testing. I knew I wanted a certain type of API design. I knew I wanted certain ways that the project would 
+be run. And so I spent a good while, you know, regardless of language, coming up with those principles and guidelines. And then once I had that, I 
+had the first working implementation that I was happy with, then kind of copying those guidelines with agentic was actually easier because in a 
+lot of ways the engineering work of what this thing is and how it operates at a high level had been set. Then, writing the code 
+in Rust or actually writing the code in Swift was actually just an easier step that the agents were able to do very quickly.
+
+### Perfect - let's get into UUIDv7. Probably important that everyone understands first: what's the purpose of a UUID?
+
+Yeah, so UUIDs are universally unique identifiers, and they're used anytime that you want to have an object or a thing and you 
+want to give it a unique ID so that you can find it and that the chances that somebody else will have that exact same ID are 
+extremely low. So UUID V1, I believe, is actually part of how networking equipment identified itself.
+
+So it'd be like literally when you connect to wifi or to a network, that was like, hey, well each 
+manufacturer will just make up a really big random number and then put that on your computer and then we won't ever have a 
+conflict. There won't ever be somebody with the same name as me. And then the one that's most common is called UUID v4. That is, 
+its approach is that it's basically an entirely random number and it's big enough.
+
+These numbers are extremely random and extremely hard to have conflict with. So what they're good for is being able to 
+say - I'll just pick on Square here - when you place an order in a coffee shop, or you're buying something, it's given a unique ID. And so 
+we want to make sure that we never have a conflict in it. It's also not guessable, right? We don't want to leak information. So traditionally,
+more common IDs on the internet you might have seen is like a number and each time like maybe do a blog post that number goes up by 
+one. And one of the downsides of that is that it's guessable. So if I do blog post `100`, then I'm pretty sure I might be able to go 
+look at `101` to get the next blog post. 
+
+UUIDs are also really good for distributed systems. Distributed system don't have one official authority. So it's saying that, hey, we have a 
+lot of different nodes, like a little network, and everybody has some amount of responsibility. So each one of those nodes needs a 
+random name. And if they generate a new object, like a new order or new something, we want to make sure that they have, they can 
+just generate themselves without needing to tell anybody else or double check with them and say, hey, do you have this ID or not? 
+
+### And now the UUID version 7 standard is newer; what does it offer and why create a new UUID library for it here at Block?
+
+A couple of things. To the question of storage, at Block our systems that have traditionally used UUID v4s have an in-house 
+compacting version. When you write out a full UUID, it's generally written with dashes in it and becomes a very long string that is far more than 128 bits. These were originally meant 
+to just be a number that, when it goes through the CPU, it's just seeing the number itself. We use a base 62 representation, which means using more letters than the typical canonical way you display them. We're actually able to get it into 
+characters, so it's just a character string. That's something that we used all over our systems and between all of our different platforms, 
+which are all written in different languages. One of my goals was to find well-maintained, secure, properly vetted versions of UUID for all of the major languages that we support across Block. I struggled to find them because there just weren't any UUID v7 implementations for 
+some of them, especially ones that we could trust.
+
+The advantage of UUIDv7 is that it encodes the timestamp that the UUID was 
+created into the value itself without sacrificing too much uniqueness. And for us, we have so many different systems, so many different 
+backend systems that are all generating IDs. And we also have our POS systems at Square, and on CashApp, and each one of them 
+is sort of a distributed system.
+
+So just by being able to kind of kill two birds with one stone, you get the timestamp of when the thing was created and also you get 
+this unique identifier for it. So I just really felt it was more about engineering excellence and starting to have more efficiency and a 
+more intelligent system and using some new emerging standards than it was about any one particular problem that we have.
+
+And then on the other hand, I wanted to have the ability to have these compacted strings built in as a first class idea. So when your 
+storage is a `String`, it's an efficient storage method. And all of the languages have the exact same implementation.
+
+### That brings me into something that I was thinking about earlier. You've got several different language implementations in here. Has it been difficult to maintain parity among all of them? Are you looking for community help in maintaining some of these going forward?
+
+We definitely can use community help, because each I'm not an expert in each of these languages. Most of the 
+implementations were done via Amp, [SourceGraph's Amp](https://sourcegraph.com/amp), which is powered by 
+[Claude Code](https://code.claude.com/docs/en/overview). A lot of it, like the Swift implementation, I looked over and made 
+sure it looked correct to me.
+
+But certainly within each of these ecosystems, people are real experts on what a beautiful API design looks like, release patterns, 
+and how to integrate with that community. That's the stuff I think that's really useful that you can't really just teach somebody if they're not 
+really part of the community.
+
+### Amazing. If you'd like to get involved, what's the best way to do that?
+
+Yeah, go to the GitHub page! [https://github.com/block/uuidv7/](https://github.com/block/uuidv7/).
+
+## Connect with Hampton
+
+* [Personal Site - `hamptonmakes.com`](https://hamptonmakes.com/)
+* [GitHub](https://github.com/hamptonmakes)
+* [Bluesky](https://bsky.app/profile/hamptonmakes.com)
