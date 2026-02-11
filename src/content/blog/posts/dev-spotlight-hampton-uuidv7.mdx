@@ -63,8 +63,7 @@ But they're not really good at having a great sense of what the real problem is 
 interacting with the system. And then you ask your question about what my flow is. For me, I'm mostly running single agents on my 
 computer and I'm generally in constant conversation with it.
 
-And I spend a lot of time thinking through the engineering applications and giving it a design. So to build this UUID v7 library, I actually 
-just started with a set of principles that I knew I wanted in a library. It didn't matter the language. I knew I wanted the compacted form. 
+And I spend a lot of time thinking through the engineering applications and giving it a design. So to build this UUID v7 library, I just started with a set of principles that I knew I wanted in a library. It didn't matter the language. I knew I wanted the compacted form. 
 I knew that I wanted certain types of testing. I knew I wanted a certain type of API design. I knew I wanted certain ways that the project would 
 be run. And so I spent a good while, you know, regardless of language, coming up with those principles and guidelines. And then once I had that, I 
 had the first working implementation that I was happy with, then kind of copying those guidelines with agentic was actually easier because in a 
@@ -82,7 +81,7 @@ manufacturer will just make up a really big random number and then put that on y
 conflict. There won't ever be somebody with the same name as me. And then the one that's most common is called UUID v4. That is, 
 its approach is that it's basically an entirely random number and it's big enough.
 
-These numbers are extremely random and extremely hard to have conflict. So what they're good for is being able to 
+These numbers are extremely random and extremely hard to have conflict with. So what they're good for is being able to 
 say - I'll just pick on Square here - when you place an order in a coffee shop, or you're buying something, it's given a unique ID. And so 
 we want to make sure that we never have a conflict in it. It's also not guessable, right? We don't want to leak information. So traditionally,
 more common IDs on the internet you might have seen is like a number and each time like maybe do a blog post that number goes up by 
@@ -96,14 +95,11 @@ just generate themselves without needing to tell anybody else or double check wi
 
 ### And now the UUID version 7 standard is newer; what does it offer and why create a new UUID library for it here at Block?
 
-A couple of things. To the question of storage, at Block, our systems that have traditionally used UUID v4s use an in-house 
-kind of specific compacting version, which when you write out a full UUID, it's generally written with these dashes in it. It's 
-like a very long string, which is far more than 128 bits. So when you have it as a string, it's really long. Because these were originally meant 
-to just be a number. So when it goes through the CPU, it's just seeing the number itself. But we use a base 62 representation, which basically 
-just means, using some more letters than are in the typical canonical way you display them, we're actually able to get it into 
-characters. So it's just a character string. And that's something that we used all over our systems and between all of our different platforms, 
-which are all written in different languages. So one of the goals that I had was, first of all, there weren't any, I struggled to find well-maintained, 
-secure, properly looked at versions of UID for all of the major languages that we support across Block. And I also, so there just was no UUID v7 for 
+A couple of things. To the question of storage, at Block our systems that have traditionally used UUID v4s have an in-house 
+compacting version. When you write out a full UUID, it's generally written with dashes in it and becomes a very long string that is far more than 128 bits. These were originally meant 
+to just be a number that, when it goes through the CPU, it's just seeing the number itself. We use a base 62 representation, which means using more letters than the typical canonical way you display them. We're actually able to get it into 
+characters, so it's just a character string. That's something that we used all over our systems and between all of our different platforms, 
+which are all written in different languages. One of my goals was to find well-maintained, secure, properly vetted versions of UUID for all of the major languages that we support across Block. I struggled to find them because there just weren't any UUID v7 implementations for 
 some of them, especially ones that we could trust.
 
 The advantage of UUIDv7 is that it encodes the timestamp that the UUID was 
@@ -120,7 +116,7 @@ storage is a `String`, it's an efficient storage method. And all of the language
 
 ### That brings me into something that I was thinking about earlier. You've got several different language implementations in here. Has it been difficult to maintain parity among all of them? Are you looking for community help in maintaining some of these going forward?
 
-Yeah, well, definitely can use community help, because each I'm not an expert in each of these languages. So most of the 
+We definitely can use community help, because each I'm not an expert in each of these languages. Most of the 
 implementations were done via Amp, [SourceGraph's Amp](https://sourcegraph.com/amp), which is powered by 
 [Claude Code](https://code.claude.com/docs/en/overview). A lot of it, like the Swift implementation, I looked over and made 
 sure it looked correct to me.
