@@ -88,7 +88,7 @@ importers:
         version: 1.0.7(tailwindcss@4.2.4)
       tar:
         specifier: ^7.5.7
-        version: 7.5.13
+        version: 7.5.16
       undici:
         specifier: '>=6.23.0'
         version: 7.25.0
@@ -2644,8 +2644,8 @@ packages:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
 
-  tar@7.5.13:
-    resolution: {integrity: sha512-tOG/7GyXpFevhXVh8jOPJrmtRpOTsYqUIkVdVooZYJS/z8WhfQUX8RJILmeuJNinGAMSu1veBr4asSHFt5/hng==}
+  tar@7.5.16:
+    resolution: {integrity: sha512-56adEpPMouktRlBLXiaYFFzZ/3+JXa8P9n7WbR+ibIjtviN55mEaOkiysCnPnWm+7kkui1Dn8J9l+g6zV8731w==}
     engines: {node: '>=18'}
 
   tiny-inflate@1.0.3:
@@ -3343,7 +3343,7 @@ snapshots:
       local-pkg: 0.5.1
       pathe: 1.1.2
       svgo: 3.3.2
-      tar: 7.5.13
+      tar: 7.5.16
     transitivePeerDependencies:
       - debug
       - supports-color
@@ -5952,7 +5952,7 @@ snapshots:
 
   tapable@2.3.3: {}
 
-  tar@7.5.13:
+  tar@7.5.16:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
