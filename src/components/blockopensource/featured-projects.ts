@@ -13,6 +13,28 @@ export const featuredProjects: Project[] = [
     ],
   },
   {
+    name: "Berd",
+    href: "https://berd.xyz/",
+    iconName: "block-open-source/berd",
+    starsAndForks: "block/berd",
+    paragraphs: [
+      "Berd is an open source desktop app for getting work done with AI agents, using any model. Built on the Goose backend, Berd gives you a native home for your agent sessions: organize work into projects, attach folders for context, and move between conversations without losing your place.",
+      "Berd is designed to be extended. Create custom agents and reusable skills, connect the tools you already use, and automate recurring workflows, all from a desktop experience that stays out of your way. Because it speaks to Goose over an open protocol, you keep full control over models, providers, and where your data goes.",
+      "Berd also has a personality of its own, and we wrote about the design thinking behind it in Designing AI with character: what we learned building Berd. Whether you're shipping code, doing research, or automating the busywork, Berd makes working alongside agents feel like a natural part of your day."
+    ],
+  },
+  {
+    name: "Buzz",
+    href: "https://buzz.xyz/",
+    iconName: "block-open-source/buzz",
+    starsAndForks: "block/buzz",
+    paragraphs: [
+      "Buzz is a self-hostable workspace where humans and AI agents build together, side by side. Agents aren't bolted on as bots. They're first-class teammates with their own identities, channel memberships, and audit trails. They can open repos, send patches, review code, run workflows, edit canvases, and join huddles, with the same affordances as a human collaborator.",
+      "Under the hood, Buzz is built on the open Nostr protocol: every message, reaction, workflow step, review approval, and git event is a signed event in one unified log. That means one searchable record of the conversation, the patch, the CI run, and the decision, plus a relay you own, so your team's history stays yours.",
+      "If you've wondered what team collaboration looks like when agents do real work, Buzz is the answer."
+    ],
+  },
+  {
     name: "OkHttp",
     href: "https://square.github.io/okhttp/",
     iconName: "block-open-source/okhttp",
