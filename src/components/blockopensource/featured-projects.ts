@@ -18,9 +18,9 @@ export const featuredProjects: Project[] = [
     iconName: "block-open-source/berd",
     starsAndForks: "block/berd",
     paragraphs: [
-      "Berd is an open source desktop app for getting work done with AI agents, using any model. Built on the Goose backend, Berd gives you a native home for your agent sessions: organize work into projects, attach folders for context, and move between conversations without losing your place.",
-      "Berd is designed to be extended. Create custom agents and reusable skills, connect the tools you already use, and automate recurring workflows, all from a desktop experience that stays out of your way. Because it speaks to Goose over an open protocol, you keep full control over models, providers, and where your data goes.",
-      "Berd also has a personality of its own, and we wrote about the design thinking behind it in Designing AI with character: what we learned building Berd. Whether you're shipping code, doing research, or automating the busywork, Berd makes working alongside agents feel like a natural part of your day."
+      "Berd is an open source desktop app for getting work done with AI agents, using any model. Built on the goose framework and connected through the Agent Client Protocol, Berd brings conversations, files, projects, agents, and skills together in one consistent environment. Instead of rebuilding context for every task, you shape agents around the way you work and pick up right where you left off.",
+      "Berd is also an exploration of a design question: how do you make something as abstract as an AI agent easier to understand and shape? Our answer was character. In Berd, agents have distinct visual identities, including our flagship collection of animated \"Gloopies,\" that make each agent's role, skills, and tools recognizable at a glance. Just by chatting, anyone can create custom agents for any task, from writing in your style to planning travel. It's AI that's visible, approachable, and personal, not just powerful.",
+      "Whether you're shipping code, doing research, or automating the busywork, Berd makes working alongside agents feel like a natural part of your day."
     ],
   },
   {

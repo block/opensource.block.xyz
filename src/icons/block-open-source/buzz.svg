@@ -1,10 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Buzz">
-  <rect width="512" height="512" rx="96" fill="#0b0b0b"/>
-  <path d="M256 75 334 120v90l-78 45-78-45v-90z" fill="#ffd84d"/>
-  <path d="M178 210 256 255v90l-78 45-78-45v-90z" fill="#ffbd24"/>
-  <path d="M334 210 412 255v90l-78 45-78-45v-90z" fill="#ffb000"/>
-  <path d="M256 300 334 345v90l-78 45-78-45v-90z" fill="#ff8a00"/>
-  <path d="M256 105 306 134l-50 29-50-29z" fill="#ffe680" opacity=".75"/>
-  <path d="M178 240 228 269l-50 29-50-29z" fill="#ffe680" opacity=".55"/>
-  <path d="M334 240 384 269l-50 29-50-29z" fill="#ffe680" opacity=".55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 466 309" fill="none">
+  <!-- Buzz bee mark. Geometry matches the mark on buzz.xyz: two side circles
+       plus a rounded body, with eyes and slots knocked out by the mask. -->
+  <defs>
+    <mask id="buzz-bee-mask">
+      <circle cx="91.7" cy="154.5" r="91.7" fill="white"/>
+      <circle cx="374.3" cy="154.5" r="91.7" fill="white"/>
+      <rect x="128" y="0" width="210" height="309" rx="34" fill="white"/>
+      <ellipse cx="193.3" cy="84.4" rx="27" ry="27" fill="black"/>
+      <ellipse cx="276" cy="84.4" rx="27" ry="27" fill="black"/>
+      <rect x="166.3" y="157.2" width="136.9" height="38.3" rx="5" fill="black"/>
+      <rect x="166.9" y="235.1" width="136.2" height="37.6" rx="5" fill="black"/>
+    </mask>
+  </defs>
+  <rect fill="currentColor" x="0" y="0" width="466" height="309" mask="url(#buzz-bee-mask)"/>
 </svg>
