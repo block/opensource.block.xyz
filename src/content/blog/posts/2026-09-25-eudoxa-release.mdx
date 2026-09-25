@@ -1,0 +1,40 @@
+---
+title: "Introducing Eudoxa: A Trustworthy Recommendation Engine"
+author: jochen
+date: "2026-09-25"
+slug: "eudoxa-recommendation-engine"
+excerpt: "We are open-sourcing 'Eudoxa', an agentic product recommendation engine that uses reliable reasoning and grounded facts."
+image: "eudoxa-whitepaper.png"
+ogImage: "eudoxa-whitepaper.png"
+tags: ["ai", "white-paper"]
+readTime: "3 minutes"
+---
+import { Image } from 'astro:assets';
+import imageEudoxaExample from '/src/assets/blog/eudoxa_recommend_example1.png';
+
+*The Eudoxa code and technical white paper are available here: [white paper](https://raw.githubusercontent.com/block/eudoxa/main/eudoxa_whitepaper_2026.pdf), [code](https://github.com/block/eudoxa).*
+
+## Code Release
+
+We are open-sourcing the Eudoxa recommendation engine. It is an agentic product recommendation engine using explainable, reliable reasoning and grounded facts with principled epistemics.
+
+Eudoxa gathers information about a product set or category from the web, from which it extracts, aggregates and calibrates facts. A web frontend with a chat-like interface allows a customer to interact with an LLM-backed agent that uses the ranking component to make recommendations and surface questions for the customer in order to elicit their preferences.
+
+## Project Motivation
+
+Agent-mediated purchase decisions are here to stay. Current agentic LLM recommendations can suffer from unreliable reasoning and hallucinated facts, reducing their trustworthiness. When higher value purchases are at stake, customers appreciate a disciplined decision process that carefully weighs trade-offs, elicits preferences and can substantiate its recommendations in a manner that earns trust.
+
+Eudoxa performs multi-criteria item ranking under joint fact and preference uncertainty. To do this, we built a knowledge-based system with a decision model that represents the uncertainty in both facts and customer preferences. The model helps a customer make trade-offs between products based on attributes. Recommendations are made using compromise ranking from multi-criteria decision analysis (MCDA). Eudoxa aims to learn more about a customer's preferences in the conversation, making the recommendation better. Customers can refine preferences in detail-oriented deliberation or be guided by generated questions/answers (prioritized by potential to change the recommendation, roughly by value of information (VOI)).
+
+With a deep integration between a knowledge-based system and agentic LLMs, we've built a more trustworthy recommendation system than one that relies solely on reasoning by an LLM. The approach makes a conscious trade-off between flexibility and reliability. Recommendations are based on a constrained algorithm that considers a limited set of product attributes and compares them in a structured way, arriving at a carefully weighed ranking. In its current form, the engine should not attempt other ways (e.g. ad-hoc comparisons) of establishing product comparisons.
+
+We believe this recommendation engine compares very favourably in scenarios where there is a large catalog of products, and where a customer is sufficiently motivated to share their preferences and cares about the detail. (Other user experiences are of course possible, e.g. if preferences are known ahead of time, and/or a less complex user interaction model is chosen, where detailed trade-offs and ranking results are handled implicitly).
+
+For more details, please see the [code and white paper](https://github.com/block/eudoxa).
+
+## Example
+
+A prototype web frontend is included in the code release, as is an example dataset. 
+
+##
+<Image src={imageEudoxaExample} alt="Example screenshot" width={1000} densities={[1, 2]} />
