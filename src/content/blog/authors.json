@@ -26,5 +26,11 @@
       "social-github": "vthub",
       "social-linkedin": "in/trofimchuk",
       "avatar" : "vasilii.png"
+    },
+    "jochen" : {
+      "name": "Jochen Bekmann",
+      "title": "AI R&D Engineer, Block",
+      "social-github": "jochenx",
+      "avatar" : "jochen_avatar.jpeg"
     }
 }
