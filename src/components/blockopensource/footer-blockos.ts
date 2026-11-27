@@ -52,7 +52,7 @@ export const footerBlockOSData: FooterBlockOSData = {
         { title: "X (Twitter)", href: "https://x.com/blockopensource", external: true, icon: "x-twitter" },
         { title: "GitHub", href: "https://github.com/block", external: true, icon: "octicon-github" },
         // { title: "LinkedIn", href: "https://www.linkedin.com/company/block-opensource", external: true, icon: "linkedin" },
-        { title: "Discord", href: "https://discord.gg/block-opensource", external: true, icon: "discord" },
+        { title: "Discord", href: "https://discord.gg/uAScrDDRUW", external: true, icon: "discord" },
       ]
     }
   ],
